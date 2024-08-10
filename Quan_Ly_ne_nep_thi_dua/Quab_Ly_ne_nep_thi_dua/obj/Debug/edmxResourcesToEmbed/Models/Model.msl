@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QL_nenepthiduaModelStoreContainer" CdmEntityContainer="QL_nenepthiduaEntities">
+    <EntitySetMapping Name="DanhGias">
+      <EntityTypeMapping TypeName="QL_nenepthiduaModel.DanhGia">
+        <MappingFragment StoreEntitySet="DanhGia">
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="HocKy" ColumnName="HocKy" />
+          <ScalarProperty Name="Thang" ColumnName="Thang" />
+          <ScalarProperty Name="Tuan" ColumnName="Tuan" />
+          <ScalarProperty Name="IdDanhGia" ColumnName="IdDanhGia" />
+          <ScalarProperty Name="IdLop" ColumnName="IdLop" />
+          <ScalarProperty Name="TongDiem" ColumnName="TongDiem" />
+          <ScalarProperty Name="XepLoai" ColumnName="XepLoai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DiemHocTaps">
+      <EntityTypeMapping TypeName="QL_nenepthiduaModel.DiemHocTap">
+        <MappingFragment StoreEntitySet="DiemHocTap">
+          <ScalarProperty Name="Diemkemsdb" ColumnName="Diemkemsdb" />
+          <ScalarProperty Name="Diemtotsdb" ColumnName="Diemtotsdb" />
+          <ScalarProperty Name="Diemgiokem" ColumnName="Diemgiokem" />
+          <ScalarProperty Name="Diemgioyeu" ColumnName="Diemgioyeu" />
+          <ScalarProperty Name="Diemgiotb" ColumnName="Diemgiotb" />
+          <ScalarProperty Name="Diemgiotot" ColumnName="Diemgiotot" />
+          <ScalarProperty Name="IdDiemht" ColumnName="IdDiemht" />
+          <ScalarProperty Name="IdLop" ColumnName="IdLop" />
+          <ScalarProperty Name="DiemHocTap1" ColumnName="DiemHocTap" />
+          <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+          <ScalarProperty Name="Tuan" ColumnName="Tuan" />
+          <ScalarProperty Name="Thang" ColumnName="Thang" />
+          <ScalarProperty Name="HocKy" ColumnName="HocKy" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DiemNeNeps">
+      <EntityTypeMapping TypeName="QL_nenepthiduaModel.DiemNeNep">
+        <MappingFragment StoreEntitySet="DiemNeNep">
+          <ScalarProperty Name="IdDiemnn" ColumnName="IdDiemnn" />
+          <ScalarProperty Name="IdLop" ColumnName="IdLop" />
+          <ScalarProperty Name="DiemNeNep1" ColumnName="DiemNeNep" />
+          <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+          <ScalarProperty Name="Tuan" ColumnName="Tuan" />
+          <ScalarProperty Name="Thang" ColumnName="Thang" />
+          <ScalarProperty Name="HocKy" ColumnName="HocKy" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GVCNs">
+      <EntityTypeMapping TypeName="QL_nenepthiduaModel.GVCN">
+        <MappingFragment StoreEntitySet="GVCN">
+          <ScalarProperty Name="IdGVCN" ColumnName="IdGVCN" />
+          <ScalarProperty Name="HoTenGVCN" ColumnName="HoTenGVCN" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HocSinhs">
+      <EntityTypeMapping TypeName="QL_nenepthiduaModel.HocSinh">
+        <MappingFragment StoreEntitySet="HocSinh">
+          <ScalarProperty Name="IdHocSinh" ColumnName="IdHocSinh" />
+          <ScalarProperty Name="HoTenHocSinh" ColumnName="HoTenHocSinh" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IdLop" ColumnName="IdLop" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lops">
+      <EntityTypeMapping TypeName="QL_nenepthiduaModel.Lop">
+        <MappingFragment StoreEntitySet="Lop">
+          <ScalarProperty Name="IdLop" ColumnName="IdLop" />
+          <ScalarProperty Name="TenLop" ColumnName="TenLop" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="IdGVCN" ColumnName="IdGVCN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="QL_nenepthiduaModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaiKhoans">
+      <EntityTypeMapping TypeName="QL_nenepthiduaModel.TaiKhoan">
+        <MappingFragment StoreEntitySet="TaiKhoan">
+          <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
+          <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+          <ScalarProperty Name="QuyenTruyCap" ColumnName="QuyenTruyCap" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViPhams">
+      <EntityTypeMapping TypeName="QL_nenepthiduaModel.ViPham">
+        <MappingFragment StoreEntitySet="ViPham">
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="HocKy" ColumnName="HocKy" />
+          <ScalarProperty Name="Thang" ColumnName="Thang" />
+          <ScalarProperty Name="IdViPham" ColumnName="IdViPham" />
+          <ScalarProperty Name="IdHocSinh" ColumnName="IdHocSinh" />
+          <ScalarProperty Name="LoaiViPham" ColumnName="LoaiViPham" />
+          <ScalarProperty Name="MoTaViPham" ColumnName="MoTaViPham" />
+          <ScalarProperty Name="NgayViPham" ColumnName="NgayViPham" />
+          <ScalarProperty Name="TenTuan" ColumnName="TenTuan" />
+          <ScalarProperty Name="DiemTru" ColumnName="DiemTru" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

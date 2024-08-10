@@ -1,0 +1,376 @@
+﻿@*@model IEnumerable<Quab_Ly_ne_nep_thi_dua.Models.TaiKhoan>*@
+@model IPagedList<Quab_Ly_ne_nep_thi_dua.Models.TaiKhoan>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Index";
+}
+@*<link href="~/Content/assets/css/giaodienidex.css" rel="stylesheet" />*@
+<style>
+    .table th:nth-child(3),
+    .table td:nth-child(3) {
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; /* Ngăn chặn ngắt dòng */
+    }
+
+    phantrang {
+        margin-left: 10px;
+    }
+
+    .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+
+        .pagination li {
+            display: inline;
+        }
+
+            .pagination li a,
+            .pagination li span {
+                position: relative;
+                float: left;
+                padding: 6px 12px;
+                margin-left: -1px;
+                line-height: 1.42857143;
+                color: #428bca;
+                text-decoration: none;
+                background-color: #fff;
+                border: 1px solid #ddd;
+            }
+
+            .pagination li:first-child a {
+                margin-left: 0;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+
+            .pagination li:last-child a {
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+
+            .pagination li.active span {
+                z-index: 2;
+                color: #fff;
+                cursor: default;
+                background-color: #428bca;
+                border-color: #428bca;
+            }
+
+            .pagination li.disabled span,
+            .pagination li.disabled a,
+            .pagination li.disabled a:hover,
+            .pagination li.disabled a:focus {
+                color: #777;
+                cursor: not-allowed;
+                background-color: #fff;
+                border-color: #ddd;
+            }
+
+            .pagination li a:hover,
+            .pagination li a:focus {
+                z-index: 2;
+                color: #2a6496;
+                background-color: #eee;
+                border-color: #ddd;
+            }
+
+            /* Định dạng cho phần số trang */
+            .pagination li a,
+            .pagination li span {
+                display: inline-block;
+                padding: 5px 10px;
+                margin-right: 5px;
+                border: 1px solid #ddd;
+                line-height: 1.42857143;
+                text-decoration: none;
+                color: #337ab7;
+                background-color: #fff;
+            }
+
+            .pagination li.active span,
+            .pagination li.active a,
+            .pagination li.active a:hover,
+            .pagination li.active a:focus {
+                z-index: 2;
+                color: #fff;
+                background-color: #337ab7;
+                border-color: #337ab7;
+                cursor: default;
+            }
+
+            .pagination li.disabled span,
+            .pagination li.disabled a,
+            .pagination li.disabled a:hover,
+            .pagination li.disabled a:focus {
+                color: #777;
+                cursor: not-allowed;
+                background-color: #fff;
+                border-color: #ddd;
+            }
+    #alert-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .alert {
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        background: linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61));
+        color: #fff;
+        border-color: #c3e6cb;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+
+    .alert-hide {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+</style>
+@if (TempData["Xoathanhcong"] != null && (bool)TempData["Xoathanhcong"])
+{
+    <div id="alert-container"></div>
+    <script>
+        function showNotification(message) {
+            var alertElement = document.createElement('div');
+            alertElement.classList.add('alert', 'alert-success');
+            alertElement.textContent = message;
+            document.getElementById('alert-container').appendChild(alertElement);
+
+            setTimeout(function () {
+                alertElement.classList.add('alert-hide');
+                setTimeout(function () {
+                    alertElement.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        showNotification('Xóa thành công!');
+    </script>
+}
+@if (TempData["Suathanhcong"] != null && (bool)TempData["Suathanhcong"])
+{
+    <div id="alert-container"></div>
+    <script>
+        function showNotification(message) {
+            var alertElement = document.createElement('div');
+            alertElement.classList.add('alert', 'alert-success');
+            alertElement.textContent = message;
+            document.getElementById('alert-container').appendChild(alertElement);
+
+            setTimeout(function () {
+                alertElement.classList.add('alert-hide');
+                setTimeout(function () {
+                    alertElement.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        showNotification('Sửa thành công!');
+    </script>
+}
+@if (TempData["Themthanhcong"] != null && (bool)TempData["Themthanhcong"])
+{
+    <div id="alert-container"></div>
+    <script>
+        function showNotification(message) {
+            var alertElement = document.createElement('div');
+            alertElement.classList.add('alert', 'alert-success');
+            alertElement.textContent = message;
+            document.getElementById('alert-container').appendChild(alertElement);
+
+            setTimeout(function () {
+                alertElement.classList.add('alert-hide');
+                setTimeout(function () {
+                    alertElement.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        showNotification('Thêm thành công!');
+    </script>
+}
+@if (TempData["Datlaithanhcong"] != null && (bool)TempData["Datlaithanhcong"])
+{
+    <div id="alert-container"></div>
+    <script>
+        function showNotification(message) {
+            var alertElement = document.createElement('div');
+            alertElement.classList.add('alert', 'alert-success');
+            alertElement.textContent = message;
+            document.getElementById('alert-container').appendChild(alertElement);
+
+            setTimeout(function () {
+                alertElement.classList.add('alert-hide');
+                setTimeout(function () {
+                    alertElement.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        showNotification('Mật khẩu đã được đặt lại là \"111111\"!');
+    </script>
+}
+<div class="container mt-4">
+    <h2>Quản lý tài khoản</h2>
+
+    @using (Html.BeginForm("Index", "TaiKhoans", FormMethod.Get, new { @class = "mt-4" }))
+    {
+        <div class="row" style="background-color: #f8f9fa; padding: 10px; border: 1px solid #dee2e6; border-radius: 10px; ">
+            <div class="col-md-4">
+                <p class="font-weight-bold">Tên đăng nhập:</p>
+                @Html.TextBox("taikhoan", ViewBag.taikhoanFilter as string, new { placeholder = "Tên đăng nhập", @class = "form-control" })
+            </div>
+            <div class="col-md-4">
+                <p class="font-weight-bold">Vai trò:</p>
+                @Html.DropDownList("Vaitro", new SelectList(
+                    new List<Object>{
+                        new { value = 1 , text = "Quản Trị"},
+                        new { value = 2 , text = "Lớp Trực Ban"},
+                        new { value = 3 , text = "Giáo Viên"},
+                        new { value = 4 , text = "Ban Giám Hiệu"}
+                    },
+                    "value",
+                    "text",
+                    null
+                ), "-- Vai trò --", new { @class = "form-control" })
+            </div>
+            <div class="col-md-4">
+                <p class="font-weight-bold">Trạng thái:</p>
+                @Html.DropDownList("trangthai", new SelectList(
+                    new List<Object>{
+                        new { value = true , text = "Hoạt động"},
+                        new { value = false , text = "Không hoạt động"}
+                    },
+                    "value",
+                    "text",
+                    null
+                ), "-- Chọn trạng thái --", new { @class = "form-control" })
+            </div>
+
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <label class="invisible">Placeholder</label>
+                <div class="text-center d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary mt-4 mr-2">
+                        <i class="fas fa-search"></i> Tìm kiếm
+                    </button>
+                    <button class="btn btn-secondary mt-4 ms-2" id="clearFilters">
+                        <i class="fas fa-sync-alt"></i> Bỏ lọc
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger mt-4" role="alert">
+            <p style="color:red; text-align:center">  @ViewBag.ErrorMessage</p>
+        </div>
+    }
+
+    <a href="@Url.Action("Create")" class="btn btn-success mt-4">
+        <ion-icon name="person-add-outline"></ion-icon> Tạo tài khoản
+    </a>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>STT</th>
+                    <th>Tài khoản</th>
+                    <th>Mật khẩu</th>
+                    <th>Vai trò</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var stt = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    ++stt;
+                    <tr>
+                        <td>@stt</td>
+                        <td>@Html.DisplayFor(modelItem => item.TenDangNhap)</td>
+                        <td>********</td>
+                        <td>
+                            @if (item.QuyenTruyCap == 1)
+                            {
+                                <p>Quản trị</p>
+                            }
+                            else if (item.QuyenTruyCap == 2)
+                            {
+                                <p>Lớp trực ban</p>
+                            }
+                            else if (item.QuyenTruyCap == 3)
+                            {
+                                <p>Giáo viên</p>
+                            }
+                            else if (item.QuyenTruyCap == 4)
+                            {
+                                <p>Ban giám hiệu</p>
+                            }
+                        </td>
+                        <td>
+                            @if (item.TrangThai == true)
+                            {
+                                <p>Hoạt động</p>
+                            }
+                            else
+                            {
+                                <p>Không hoạt động</p>
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", new { id = item.IdTaiKhoan })" class="btn btn-primary btn-sm"><ion-icon name="create-outline"></ion-icon> Sửa</a>
+                            <a href="@Url.Action("Details", new { id = item.IdTaiKhoan })" class="btn btn-info btn-sm"><ion-icon name="eye-outline"></ion-icon> Xem</a>
+                            <a href="@Url.Action("Delete", new { id = item.IdTaiKhoan })" class="btn btn-danger btn-sm"><ion-icon name="trash-outline"></ion-icon> Xóa</a>
+                            <a href="@Url.Action("DatLaiMatKhau", new { id = item.IdTaiKhoan })" class="btn btn-secondary btn-sm"><ion-icon name="key-outline"></ion-icon> Đặt lại mật khẩu</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchTitle = Request.QueryString["searchTitle"] }))
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("clearFilters").addEventListener("click", function () {
+            // Lấy ra tất cả các input và select trong form
+            var formInputs = document.querySelectorAll('input[type="text"], input[type="date"], select');
+
+            // Duyệt qua từng phần tử để reset giá trị
+            formInputs.forEach(function (input) {
+                input.value = ""; // Reset giá trị về rỗng
+            });
+
+            // Gửi form để xóa bộ lọc
+            document.querySelector('form').submit();
+        });
+    });
+</script>

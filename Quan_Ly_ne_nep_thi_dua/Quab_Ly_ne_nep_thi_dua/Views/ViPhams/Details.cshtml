@@ -1,0 +1,107 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.ViPham
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Content/assets/css/giaodiendelete.css" rel="stylesheet" />
+<div class="container">
+    <h2>Thông tin vi phạm của học sinh @Html.DisplayFor(model => model.HocSinh.HoTenHocSinh)</h2>
+    <div class="formkk">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.HocSinh.Lop.TenLop)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HocSinh.Lop.TenLop)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.HocSinh.HoTenHocSinh)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HocSinh.HoTenHocSinh)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.HocSinh.NgaySinh)
+            </dt>
+            <dd>
+                @{
+                    DateTime ngay2;
+                    if (Model.HocSinh.NgaySinh is DateTime)
+                    {
+                        ngay2 = (DateTime)Model.HocSinh.NgaySinh;
+                    }
+                    else
+                    {
+                        ngay2 = DateTime.MinValue;
+                    }
+                }
+                @ngay2.ToString("dd/MM/yyyy")
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LoaiViPham)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LoaiViPham)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MoTaViPham)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MoTaViPham)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NgayViPham)
+            </dt>
+            <dd>
+                @{
+                    DateTime ngay;
+                    if (Model.NgayViPham is DateTime)
+                    {
+                        ngay = (DateTime)Model.NgayViPham;
+                    }
+                    else
+                    {
+                        ngay = DateTime.MinValue;
+                    }
+                }
+                @ngay.ToString("dd/MM/yyyy")
+            </dd>
+            <dt>
+               Điểm trừ
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DiemTru)
+            </dd>
+            <dt>
+                Tuần
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TenTuan)
+            </dd>
+            <dt>
+                Tháng
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Thang)
+            </dd>
+            <dt>
+                Học kỳ
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HocKy)
+            </dd>
+            <dt>
+                Năm học
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NamHoc)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.IdViPham }, new { @class = "btn btn-primary edit-button" })
+    </p>
+    <p>
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary backlist float-left" })
+    </p>
+</div>

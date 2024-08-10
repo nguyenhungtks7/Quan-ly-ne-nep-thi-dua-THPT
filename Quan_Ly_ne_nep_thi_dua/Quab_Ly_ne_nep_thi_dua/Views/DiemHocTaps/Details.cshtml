@@ -1,0 +1,110 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.DiemHocTap
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Content/assets/css/giaodiendelete.css" rel="stylesheet" />
+
+
+<div class="container">
+    <h2>Thông tin điểm học tập lớp @Html.DisplayFor(model => model.Lop.TenLop)</h2>
+    <div class="formkk">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Lop.TenLop)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Lop.TenLop)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NamHoc)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NamHoc)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Diemgiotot)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Diemgiotot)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Diemgiotb)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Diemgiotb)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Diemgioyeu)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Diemgioyeu)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Diemgiokem)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Diemgiokem)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Diemtotsdb)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Diemtotsdb)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Diemkemsdb)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Diemkemsdb)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DiemHocTap1)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DiemHocTap1)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NgayCapNhat)
+            </dt>
+            <dd>
+                @{
+                    DateTime ngay;
+                    if (Model.NgayCapNhat is DateTime)
+                    {
+                        ngay = (DateTime)Model.NgayCapNhat;
+                    }
+                    else
+                    {
+                        ngay = DateTime.MinValue;
+                    }
+                }
+                @ngay.ToString("dd/MM/yyyy")
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Tuan)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Tuan)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Thang)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Thang)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.HocKy)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HocKy)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.IdDiemht }, new { @class = "btn btn-primary edit-button" })
+    </p>
+    <p>
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary backlist float-left" })
+    </p>
+</div>

@@ -1,0 +1,96 @@
+﻿
+.form-horizontal {
+    max-width: 500px; 
+    margin: 0 auto; 
+    padding-bottom: 20px;
+}
+
+.control-label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-left: 18px;
+}
+
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    margin-bottom: 16px; 
+    margin-top: 5px;
+}
+
+
+.btn-default {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+    .btn-default:hover {
+        background-color: #0056b3;
+        color: white;
+    }
+
+
+.back-button-container {
+    margin-top: 20px; 
+}
+
+
+.back-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .back-button:hover {
+        background-color: #5a6268;
+        color: white;
+    }
+
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+.text-danger{
+    color:red;
+}
+.backlist {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+    border: none;
+    transition: background-color 0.3s ease;
+    margin-top: 50px;
+    margin-left: 10px;
+    
+}
+
+    .backlist:hover {
+        background-color: #0056b3;
+    }
+
+    .backlist::before {
+        content: "\2190";
+        font-size: 20px;
+        margin-right: 5px;
+    }

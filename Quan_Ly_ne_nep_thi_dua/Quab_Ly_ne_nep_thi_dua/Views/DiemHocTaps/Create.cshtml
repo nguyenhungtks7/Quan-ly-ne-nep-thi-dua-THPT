@@ -1,0 +1,305 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.DiemHocTap
+
+@{
+    ViewBag.Title = "Create";
+}
+<link href="~/Content/assets/css/giaodiencreateupdate.css" rel="stylesheet" />
+<h2>Thêm điểm học tập</h2>
+
+
+
+@using (Html.BeginForm("Create", "DiemHocTaps", FormMethod.Post, new { id = "yourFormId" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <p class="control-label">Lớp học</p>
+            @*      @Html.LabelFor(model => model.IdLop, "IdLop", htmlAttributes: new { @class = "control-label" })*@
+            <div class="col-md-10">
+                @Html.DropDownList("IdLop", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdLop, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Diemgiotot, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10" style="display:flex;">
+                <div>
+
+                    <p>Điểm</p>   <input type="text" id="textdiemgiotot" style="background :#a4a4a4; width:100px;" name="Diemgiotot" value="0" class="form-control" readonly />
+
+                </div>
+                <div style="margin-left: 60px">
+                    <p>Số lượng</p>  <input type="number" id="inputslgt" max="100" min="0" style=" width:100px;" class="form-control" value="0" />
+
+                </div>
+                  @Html.ValidationMessageFor(model => model.Diemgiotot, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.Diemgiotb, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10" style="display:flex;">
+                <div>
+                    <p>Điểm</p>
+                    <input type="text" id="textdiemgiotb" style="background: #a4a4a4; width: 100px;" name="Diemgiotb" value="0" class="form-control" readonly />
+                </div>
+                <div style="margin-left: 60px">
+                    <p>Số lượng</p>
+                    <input type="number" id="inputsltb" max="100" min="0" style=" width:100px;" class="form-control" value="0" />
+                </div>
+
+                @Html.ValidationMessageFor(model => model.Diemgiotb, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.Diemgioyeu, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10" style="display:flex;">
+                <div>
+                    <p>Điểm</p>
+                    <input type="text" id="textdiemgioyeu" style="background: #a4a4a4; width: 100px;" name="Diemgioyeu" value="0" class="form-control" readonly />
+                </div>
+                <div style="margin-left: 60px">
+                    <p>Số lượng</p>
+                    <input type="number" id="inputslyeu" max="100" min="0" style=" width:100px;" class="form-control" value="0" />
+                </div>
+
+                @Html.ValidationMessageFor(model => model.Diemgioyeu, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Diemgiokem, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10" style="display:flex;">
+                <div>
+                    <p>Điểm</p>
+                    <input type="text" id="textdiemgiokem" style="background: #a4a4a4; width: 100px;" name="Diemgiokem" value="0" class="form-control" readonly />
+                </div>
+                <div style="margin-left: 60px">
+                    <p>Số lượng</p>
+                    <input type="number" id="inputslkem" max="100" min="0" style=" width:100px;" value="0" class="form-control" />
+                </div>
+
+                @Html.ValidationMessageFor(model => model.Diemgiokem, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Diemtotsdb, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10" style="display:flex;">
+                <div>
+                    <p>Điểm</p>
+                    <input type="text" id="textdiemsbtot" style="background: #a4a4a4; width: 100px;"  name="Diemtotsdb" value="0" class="form-control" readonly />
+                </div>
+                <div style="margin-left: 60px">
+                    <p>Số lượng</p>
+                    <input type="number" id="inputCbtotsdb" max="100" min="0" style=" width:100px;" class="form-control" value="0" />
+                </div>
+                 
+                    @Html.ValidationMessageFor(model => model.Diemtotsdb, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Diemkemsdb, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10" style="display:flex;">
+                <div>
+                    <p>Điểm</p>
+                    <input type="text" id="textdiemsbkem"  style="background: #a4a4a4; width: 100px;"  name="Diemkemsdb" value="0" class="form-control" readonly />
+                </div>
+                <div style="margin-left: 60px">
+                    <p>Số lượng</p>
+                    <input type="number" id="inputCbkemsdb" max="100" min="0" style=" width:100px;" class="form-control" value="0" />
+                </div>
+
+                @Html.ValidationMessageFor(model => model.Diemkemsdb, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <input type="button" value="Cập nhật"  style="background: #0c61d4" id="btnCapNhat" class="btn btn-default" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.DiemHocTap1, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10">
+                <input type="text" id="DiemHocTap1" name="DiemHocTap1" value="100" class="form-control" readonly />
+                @*@Html.EditorFor(model => model.DiemHocTap1, new { htmlAttributes = new { @id = "DiemHocTap1", @style = "background-color:lightgray", @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.DiemHocTap1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*@readonly = "readonly"*@
+        @Html.HiddenFor(model => model.NgayCapNhat, new { @Value = DateTime.Now.ToString("yyyy-MM-dd") })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tuan, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("Tuan", Enumerable.Range(1, 20).Select(i => new SelectListItem { Text = "Tuần " + i, Value = i.ToString() }), "Chọn tuần", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Tuan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Thang, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("Thang", Enumerable.Range(1, 12).Select(i => new SelectListItem { Text = "Tháng " + i, Value = i.ToString() }), "Chọn tháng", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Thang, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HocKy, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("HocKy", new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "Học kỳ 1", Value = "Học kỳ 1" },
+                    new SelectListItem { Text = "Học kỳ 2", Value = "Học kỳ 2" }
+                }, "Chọn học kỳ", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.HocKy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.NamHoc, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NamHoc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NamHoc, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NamHoc, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("NamHoc", Enumerable.Range(DateTime.Now.Year - 5, 20).Select(x => new SelectListItem { Text = $"{x} - {x + 1}", Value = $"{x} - {x + 1}" }), "Chọn năm", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NamHoc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="save" value="Lưu" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="container">
+    <p>
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary backlist float-left" })
+    </p>
+</div>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+<script>
+    document.getElementById('yourFormId').addEventListener('submit', function (event) {
+        var inputslgt = parseInt(document.getElementById('inputslgt').value);
+        var inputsltb = parseInt(document.getElementById('inputsltb').value);
+        var inputslyeu = parseInt(document.getElementById('inputslyeu').value);
+        var inputslkem = parseInt(document.getElementById('inputslkem').value);
+        var inputCbtotsdb = parseInt(document.getElementById('inputCbtotsdb').value);
+        var inputCbkemsdb = parseInt(document.getElementById('inputCbkemsdb').value);
+
+        if (!(Number.isInteger(inputslgt) && inputslgt >= 0 &&
+            Number.isInteger(inputsltb) && inputsltb >= 0 &&
+            Number.isInteger(inputslyeu) && inputslyeu >= 0 &&
+            Number.isInteger(inputslkem) && inputslkem >= 0 &&
+            Number.isInteger(inputCbtotsdb) && inputCbtotsdb >= 0 &&
+            Number.isInteger(inputCbkemsdb) && inputCbkemsdb >= 0)) {
+            event.preventDefault(); // Ngăn chặn việc gửi form nếu dữ liệu không hợp lệ
+            alert("Số lượng phải là số nguyên không âm.");
+        }
+    });
+    document.getElementById('btnCapNhat').addEventListener('click', function () {
+        var inputslgt = parseFloat(document.getElementById('inputslgt').value);
+        var inputsltb = parseFloat(document.getElementById('inputsltb').value);
+        var inputslyeu = parseFloat(document.getElementById('inputslyeu').value);
+        var inputslkem = parseFloat(document.getElementById('inputslkem').value);
+        var inputCbtotsdb = parseFloat(document.getElementById('inputCbtotsdb').value);
+        var inputCbkemsdb = parseFloat(document.getElementById('inputCbkemsdb').value);
+
+
+        if (Number.isInteger(inputslgt) && inputslgt >= 0 &&
+            Number.isInteger(inputsltb) && inputsltb >= 0 &&
+            Number.isInteger(inputslyeu) && inputslyeu >= 0 &&
+            Number.isInteger(inputslkem) && inputslkem >= 0 &&
+            Number.isInteger(inputCbtotsdb) && inputCbtotsdb >= 0 &&
+            Number.isInteger(inputCbkemsdb) && inputCbkemsdb >= 0) {
+
+            // Tính toán điểm và cập nhật các ô input
+            document.getElementById('textdiemgiotot').value = inputslgt * 2;
+            document.getElementById('textdiemgiotb').value = inputsltb * -2;
+            document.getElementById('textdiemgioyeu').value = inputslyeu * -5;
+            document.getElementById('textdiemgiokem').value = inputslkem * -10;
+            document.getElementById('textdiemsbtot').value = inputCbtotsdb * 0.1;
+            document.getElementById('textdiemsbkem').value = inputCbkemsdb * -0.1;
+
+            // Tính tổng điểm với bonus và cập nhật ô input
+            var totalScore = (inputslgt * 2) + (inputsltb * -2) + (inputslyeu * -5) + (inputslkem * -10) + (inputCbtotsdb * 0.1) + (inputCbkemsdb * -0.1);
+            var totalScoreWithBonus = totalScore + 100;
+            document.getElementById('DiemHocTap1').value = totalScoreWithBonus;
+        } else {
+            alert("Số lượng phải là số nguyên không âm.");
+        }
+    });
+</script>
+@*<div class="form-group">
+        @Html.LabelFor(model => model.Diemgiotot, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Diemgiotot, new { htmlAttributes = new { @style = "background-color:lightgray", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Diemgiotot, "", new { @class = "text-danger" })
+            <input type="number" id="inputsldt" class="form-control"  />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Diemgiotb, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Diemgiotb, new { htmlAttributes = new { @style = "background-color:lightgray", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Diemgiotb, "", new { @class = "text-danger" })
+            <input type="number" id="inputsltb" class="form-control"  />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Diemgioyeu, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Diemgioyeu, new { htmlAttributes = new { @style = "background-color:lightgray", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Diemgioyeu, "", new { @class = "text-danger" })
+
+            <input type="number" id="inputslyeu" class="form-control"  />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Diemgiokem, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.Diemgiokem, new { htmlAttributes = new { @style = "background-color:lightgray", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Diemgiokem, "", new { @class = "text-danger" })
+
+            <input type="number" id="inputslkem" class="form-control" readonly  />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Diemtotsdb, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Diemtotsdb, new { htmlAttributes = new { @style = "background-color:lightgray", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Diemtotsdb, "", new { @class = "text-danger" })
+
+            <input type="number" id="inputCbtotsdb" class="form-control" readonly  />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Diemkemsdb, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Diemkemsdb, new { htmlAttributes = new { @style = "background-color:lightgray", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Diemkemsdb, "", new { @class = "text-danger" })
+
+            <input type="number" id="inputCbtotsdb" class="form-control" readonly  />
+
+        </div>
+    </div>
+    <input type="submit" value="Cập nhật"/>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DiemHocTap1, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DiemHocTap1, new { htmlAttributes = new { @value = 100, @style = "background-color:lightgray", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DiemHocTap1, "", new { @class = "text-danger" })
+
+        </div>
+    </div>*@

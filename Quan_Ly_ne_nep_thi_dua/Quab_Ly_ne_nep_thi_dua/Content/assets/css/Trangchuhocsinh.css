@@ -1,0 +1,140 @@
+﻿.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    margin: 0;
+    border-radius: 4px;
+}
+
+.dropdown-toggle {
+    color: aliceblue;
+    font-size:16px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    list-style: none;
+    padding: 8px 0;
+}
+
+    .dropdown-menu li a {
+        color: #333;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-menu li a:hover {
+            background-color: #ddd;
+        }
+footer p {
+
+    font-size: 16px; /* hoặc kích thước mong muốn */
+}
+.mr-2 {
+    width: 50px;
+    height: auto;
+}
+.text-white p {
+    font-size: 16px; /* hoặc kích thước mong muốn */
+}      
+@media (max-width: 576px) {
+    footer p {
+        font-size: 0.6rem; /* hoặc kích thước mong muốn */
+    }
+    .dropdown-toggle {
+        color: aliceblue;
+        font-size: 0.6rem;
+    }
+    .mr-2{
+ width: 29px;
+    height: auto;
+    }
+   
+    .text-white p {
+        font-size: 8px; /* hoặc kích thước mong muốn */
+    }      
+}
+@media (max-width: 767px) {
+    .table {
+        width: 100%;
+    }
+
+    .table-bang {
+        padding: 0 5px 0 20px;
+    }
+
+    h2 {
+        margin: 20px 0 20px 10px;
+    }
+
+    .search2 {
+        width: 100%;
+        padding: 10px;
+    }
+
+        .search2 input[type="text"] {
+            width: calc(100% - 100px);
+            margin-right: 0;
+        }
+
+    .create-button {
+        float: none;
+        margin: 10px auto;
+    }
+
+    .pagination {
+        margin: 20px auto;
+    }
+}
+table th,
+table td {
+    white-space: nowrap;
+    font-size: 15px;
+}
+
+/* For screens between 768px and 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+    table th,
+    table td {
+        white-space: nowrap;
+        font-size: 15px;
+    }
+    .table-bang {
+        padding: 0 5px 0 20px;
+    }
+
+    h2 {
+        margin: 20px 0 20px 10px;
+    }
+
+    .search2 {
+        width: 100%;
+        padding: 10px;
+    }
+
+        .search2 input[type="text"] {
+            width: calc(100% - 150px);
+            margin-right: 0;
+        }
+
+    .create-button {
+        float: none;
+        margin: 10px auto;
+    }
+
+    .pagination {
+        margin: 20px auto;
+    }
+}

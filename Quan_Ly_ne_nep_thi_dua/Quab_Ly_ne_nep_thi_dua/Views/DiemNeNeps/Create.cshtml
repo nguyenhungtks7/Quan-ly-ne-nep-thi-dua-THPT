@@ -1,0 +1,117 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.DiemNeNep
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<link href="~/Content/assets/css/giaodiencreateupdate.css" rel="stylesheet" />
+<h2>Thêm điểm nề nếp</h2>
+<style>
+    #DiemNeNep1{
+        background: #c2bdbd94
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdLop, "IdLop", htmlAttributes: new { @class = "control-label"})
+        <div class="col-md-10">
+            @Html.DropDownList("IdLop", null, htmlAttributes: new { @class = "form-control", id = "IdLop" })
+            @Html.ValidationMessageFor(model => model.IdLop, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.HiddenFor(model => model.NgayCapNhat, new { @Value = DateTime.Now.ToString("yyyy-MM-dd") })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tuan, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("Tuan", Enumerable.Range(1, 20).Select(i => new SelectListItem { Text = "Tuần " + i, Value = i.ToString() }), "Chọn tuần", htmlAttributes: new { @class = "form-control", id = "Tuan" })
+            @Html.ValidationMessageFor(model => model.Tuan, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Thang, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("Thang", Enumerable.Range(1, 12).Select(i => new SelectListItem { Text = "Tháng " + i, Value = i.ToString() }), "Chọn tháng", htmlAttributes: new { @class = "form-control" , id = "Thang" })
+            @Html.ValidationMessageFor(model => model.Thang, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HocKy, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("HocKy", new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Học kỳ 1", Value = "Học kỳ 1" },
+                new SelectListItem { Text = "Học kỳ 2", Value = "Học kỳ 2" }
+            }, "Chọn học kỳ", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.HocKy, "", new { @class = "text-danger", id = "HocKy" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NamHoc, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("NamHoc", Enumerable.Range(DateTime.Now.Year - 5, 20).Select(x => new SelectListItem { Text = $"{x} - {x + 1}", Value = $"{x} - {x + 1}" }), "Chọn năm", new { @class = "form-control", id = "NamHoc" })
+            @Html.ValidationMessageFor(model => model.NamHoc, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group" style="margin-bottom: 50px;">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Tính Điểm"  style="background: #0c61d4" class="btn btn-default" id="btnCalculateDiemNeNep" />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DiemNeNep1, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DiemNeNep1, new { htmlAttributes = new { @class = "form-control", id = "DiemNeNep1" } })
+            @Html.ValidationMessageFor(model => model.DiemNeNep1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Lưu" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div class="container">
+    <p>
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary backlist float-left" })
+    </p>
+</div>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function () {
+    $("#btnCalculateDiemNeNep").click(function () {
+        var tuan = $("#Tuan").val();
+        var thang = $("#Thang").val();
+        var hocky = $("#HocKy").val();
+        var namhoc = $("#NamHoc").val();
+        var idLop = $("#IdLop").val(); // Lấy giá trị Id của lớp
+        console.log(tuan + " " + thang + " " + hocky + " " + namhoc + " " + idLop);
+        $.ajax({
+            url: '@Url.Action("CalculateDiemNeNep", "DiemNeNeps")',
+            type: 'GET',
+            data: { tuan: tuan, thang: thang, hocky: hocky, namhoc: namhoc, lop: idLop }, // Truyền ID của lớp vào
+            success: function (data) {
+                $("#DiemNeNep1").val(data.TongDiemTru);
+            }
+        });
+    });
+});
+
+
+</script>

@@ -1,0 +1,66 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.Lop
+
+@{
+    ViewBag.Title = "Edit";
+}
+<link href="~/Content/assets/css/giaodiencreateupdate.css" rel="stylesheet" />
+<h2>Sửa lớp học</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.IdLop)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenLop, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenLop, new { htmlAttributes = new { @class = "form-control", placeHolder = "Tên lớp"} })
+            @Html.ValidationMessageFor(model => model.TenLop, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.NamHoc, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NamHoc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NamHoc, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.NamHoc, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("NamHoc", Enumerable.Range(DateTime.Now.Year - 5, 20).Select(x => new SelectListItem { Text = $"{x}-{x + 1}", Value = $"{x}-{x + 1}" }), "Chọn năm", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.NamHoc, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdGVCN, "IdGVCN", htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("IdGVCN", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IdGVCN, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Lưu" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div class="container">
+    <p>
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary backlist float-left" })
+    </p>
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

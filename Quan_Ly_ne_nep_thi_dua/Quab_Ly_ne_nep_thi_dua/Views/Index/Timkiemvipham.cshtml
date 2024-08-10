@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "Timkiemvipham";
+    Layout = "~/Views/Shared/_LayoutTrangchu.cshtml";
+}
+
+
+@model IPagedList<Quab_Ly_ne_nep_thi_dua.Models.ViPham>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Index";
+}
+@*<link href="~/Content/assets/css/giaodienidex.css" rel="stylesheet" />*@
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/assets/css/TrangchuTracuuvipham.css" rel="stylesheet" />
+<div class="breadcrumb">
+    <a href="@Url.Action("Index", "Index")">Trang chủ</a>
+    <span>&gt;</span>
+    <span>Tra cứu vi phạm</span>
+</div>
+<h2 style="text-align:center; margin-bottom: 20px"> Tra cứu vi phạm</h2>
+
+
+@using (Html.BeginForm("Timkiemvipham", "Index", FormMethod.Get, new { @class = "form-horizontal" }))
+{
+    <div class="row mb-3">
+        @{
+            var lopList = ViewBag.LopList as SelectList;
+        }
+        <div class="col-md-4">
+            <label for="searchLop" class="form-label">Lớp học</label>
+            @Html.DropDownList("searchLop", lopList, "Chọn lớp", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            <label for="searchHoTen" class="form-label">Họ tên học sinh</label>
+            @Html.TextBox("searchHoTen", ViewBag.CurrentHoTenFilter as string, new { placeholder = "Họ tên học sinh", @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            <label for="searchNgaySinh" class="form-label">Ngày sinh</label>
+            @Html.TextBox("searchNgaySinh", ViewBag.CurrentSDTFilter as string, new { type = "date", @class = "form-control" })
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <label class="invisible">Placeholder</label>
+                <div class="text-center d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary mt-4">
+                        <i class="fas fa-search"></i> Tìm kiếm
+                    </button>
+                    <button class="btn btn-secondary mt-4 ms-2" id="clearFilters">
+                        <i class="fas fa-sync-alt"></i> Bỏ lọc
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+
+@if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        <p style="text-align:center">  @ViewBag.ErrorMessage</p>
+    </div>
+}
+
+@if (Session["Tendangnhap"] != null)
+{
+    <p>
+        <a href="@Url.Action("create", "Index")" class="btn btn-success">
+            <i class="fas fa-plus-circle"></i> Thêm vi phạm
+        </a>
+    </p>
+
+}
+
+<div class="table-responsive">
+    <table class="table  table-hover">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Lớp</th>
+                <th>
+                    Họ tên học sinh
+                </th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Tuần vi phạm</th>
+                <th>Tháng</th>
+                <th>Học kỳ</th>
+                <th>Năm học</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var stt = 0;
+            }
+            @foreach (var item in Model)
+            {
+                ++stt;
+                <tr>
+                    <td>@stt</td>
+                    <td>@Html.DisplayFor(modelItem => item.HocSinh.Lop.TenLop)</td>
+                    <td>@Html.DisplayFor(modelItem => item.HocSinh.HoTenHocSinh)</td>
+                    @{
+                        DateTime ngay;
+                        if (item.HocSinh.NgaySinh is DateTime)
+                        {
+                            ngay = (DateTime)item.HocSinh.NgaySinh;
+                        }
+                        else
+                        {
+                            ngay = DateTime.MinValue;
+                        }
+                    }
+                    <td>@ngay.ToString("dd/MM/yyyy")</td>
+                    <td>@Html.DisplayFor(modelItem => item.HocSinh.GioiTinh)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TenTuan)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Thang)</td>
+                    <td>@Html.DisplayFor(modelItem => item.HocKy)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NamHoc)</td>
+                    <td>
+                        <a href="@Url.Action("Chitietvipham", new { id = item.IdViPham })" class="btn btn-info">
+                            <i class="fas fa-eye"></i> Xem Chi Tiết
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="phantrang">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchTitle = Request.QueryString["searchTitle"] }))
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("clearFilters").addEventListener("click", function () {
+            // Lấy ra tất cả các input và select trong form
+            var formInputs = document.querySelectorAll('input[type="text"], input[type="date"], select');
+
+            // Duyệt qua từng phần tử để reset giá trị
+            formInputs.forEach(function (input) {
+                input.value = ""; // Reset giá trị về rỗng
+            });
+
+            // Gửi form để xóa bộ lọc
+            document.querySelector('form').submit();
+        });
+    });
+</script>

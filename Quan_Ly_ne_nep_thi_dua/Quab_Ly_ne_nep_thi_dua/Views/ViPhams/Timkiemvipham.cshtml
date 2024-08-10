@@ -1,0 +1,163 @@
+﻿@*@model IEnumerable<Quab_Ly_ne_nep_thi_dua.Models.ViPham>*@
+
+@{
+    ViewBag.Title = "Timkiemvipham";
+    Layout = "~/Views/Shared/_LayoutTrangchu.cshtml";
+}
+
+@*@model IEnumerable<Quab_Ly_ne_nep_thi_dua.Models.ViPham>*@
+@model IPagedList<Quab_Ly_ne_nep_thi_dua.Models.ViPham>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/assets/css/giaodienidex.css" rel="stylesheet" />
+<style>
+
+    input[type="date"] {
+        padding: 8px 12px; /* Kích thước padding */
+        border: 1px solid #ccc; /* Viền */
+        border-radius: 4px; /* Độ cong góc */
+        box-sizing: border-box; /* Box-sizing */
+        font-size: 10px; /* Kích thước chữ */
+        background-color: #fff; /* Màu nền */
+        transition: border-color 0.3s ease; /* Hiệu ứng chuyển đổi */
+    }
+
+
+        input[type="date"]:focus {
+            border-color: #007bff;
+        }
+</style>
+<h2> Tra cứu vi phạm</h2>
+@using (Html.BeginForm("Index", "ViPhams", FormMethod.Get))
+{
+    <div class="search2" style="width: 95%;">
+        @{
+            var lopList = ViewBag.LopList as SelectList;
+        }
+        @Html.DropDownList("searchLop", lopList, "Chọn lớp", new { @class = "form-control" })
+        @Html.TextBox("searchHoTen", ViewBag.CurrentHoTenFilter as string, new { placeholder = "Họ tên GVCN" })
+        <p style="font-size: 12px">Ngày sinh</p>
+        @Html.TextBox("searchNgaySinh", ViewBag.CurrentSDTFilter as string, new { type = "date" })
+        @Html.DropDownList("Tuan", Enumerable.Range(1, 20).Select(i => new SelectListItem { Text = "Tuần " + i, Value = i.ToString() }), "Chọn tuần", htmlAttributes: new { @class = "form-control" })
+        @Html.DropDownList("Thang", Enumerable.Range(1, 12).Select(i => new SelectListItem { Text = "Tháng " + i, Value = i.ToString() }), "Chọn tháng", htmlAttributes: new { @class = "form-control" })
+        @Html.DropDownList("HocKy", new List<SelectListItem>
+{
+    new SelectListItem { Text = "Học kỳ 1", Value = "Học kỳ 1" },
+    new SelectListItem { Text = "Học kỳ 2", Value = "Học kỳ 2" }
+}, "Chọn học kỳ", htmlAttributes: new { @class = "form-control" })
+        @Html.DropDownList("NamHoc", Enumerable.Range(DateTime.Now.Year - 5, 20).Select(x => new SelectListItem { Text = $"{x} - {x + 1}", Value = $"{x} - {x + 1}" }), "Chọn năm", new { @class = "form-control" })
+        <input type="submit" value="Tìm kiếm" class="btn btn-primary" />
+    </div>
+}
+
+@if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        <p style="color:red; text-align:center">  @ViewBag.ErrorMessage</p>
+
+    </div>
+}
+<p>
+    @Html.ActionLink("+ Thêm vi phạm", "create", null, new { @class = "create-button" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            STT
+        </th>
+        <th>
+            Lớp
+        </th>
+        <th>
+            Họ tên học sinh
+        </th>
+        <th>
+            Ngày sinh
+        </th>
+        <th>
+            Giới tính
+        </th>
+
+        <th>
+            Tuần vi phạm
+        </th>
+        <th>
+            Tháng
+        </th>
+        <th>
+            Học kỳ
+        </th>
+        <th>
+            Năm học
+        </th>
+        <th></th>
+    </tr>
+    @{
+        var stt = 0;
+    }
+    @foreach (var item in Model)
+    {
+        ++stt;
+        <tr>
+            <td>
+                @stt
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HocSinh.Lop.TenLop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HocSinh.HoTenHocSinh)
+            </td>
+            @{
+                DateTime ngay;
+                if (item.HocSinh.NgaySinh is DateTime)
+                {
+                    ngay = (DateTime)item.HocSinh.NgaySinh;
+                }
+                else
+                {
+                    ngay = DateTime.MinValue;
+                }
+            }
+            <td>
+
+                @ngay.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HocSinh.GioiTinh)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TenTuan)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Thang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HocKy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamHoc)
+            </td>
+            <td>
+                @Html.ActionLink("Xem Chi Tiết", "Details", new { id = item.IdViPham })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="phantrang">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchTitle = Request.QueryString["searchTitle"] }))
+        </div>
+    </div>
+</div>
+
+

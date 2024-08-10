@@ -1,0 +1,73 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.HocSinh
+
+@{
+    ViewBag.Title = "Delete";
+}
+<link href="~/Content/assets/css/giaodiendelete.css" rel="stylesheet" />
+
+<h3>Bạn có chắc chắn muốn xóa học sinh này không?</h3>
+<div class="formkk">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HoTenHocSinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTenHocSinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiTinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lop.TenLop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lop.TenLop)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    @Html.ActionLink(" Quay lại", "Index", null, new { @class = "backlist" })
+    <input type="submit" value="Xóa" class="btn btn-default" />
+
+</div>
+       
+    }
+</div>
+

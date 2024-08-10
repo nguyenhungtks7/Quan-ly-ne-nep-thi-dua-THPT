@@ -1,0 +1,204 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    a{
+        text-decoration:none;
+        font-family: "Roboto";
+    }
+    #alert-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .alert {
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        background: linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61));
+        color: #fff;
+        border-color: #c3e6cb;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+
+    .alert-hide {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+</style>
+<div class="cardBox">
+    @if (TempData["DangNhapThanhCong"] != null && (bool)TempData["DangNhapThanhCong"])
+    {
+        <div id="alert-container"></div>
+    }
+    @if (Session["giaovien"] != null && (bool)Session["giaovien"])
+    {
+        <a href="@Url.Action("Index","GVCNs")">
+            <div class="card">
+                <div class="iconBx">
+                    <ion-icon name="people-outline"></ion-icon>
+                </div>
+                <div>
+                    <div class="numbers">Quản lý giáo viên chủ nhiệm</div>
+
+                </div>
+
+
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index","Lops")">
+            <div class="card">
+                <div class="iconBx">
+                    <ion-icon name="school-outline"></ion-icon>
+                </div>
+                <div>
+                    <div class="numbers">Quản lý lớp học</div>
+
+                </div>
+
+            </div>
+        </a>
+        <a href="@Url.Action("Index","HocSinhs")">
+            <div class="card">
+                <div class="iconBx">
+                    <ion-icon name="person-outline"></ion-icon>
+                </div>
+                <div>
+                    <div class="numbers">Quản lý học sinh</div>
+
+                </div>
+
+
+            </div>
+        </a>
+    }
+    else if (Session["bangiamhieu"] != null && (bool)Session["bangiamhieu"])
+    {
+        <a href="@Url.Action("Index","DanhGias")">
+            <div class="card">
+                <div class="iconBx">
+                    <ion-icon name="flag-outline"></ion-icon>
+                </div>
+                <div>
+                    <div class="numbers">Đánh Giá</div>
+
+                </div>
+
+
+            </div>
+        </a>
+    }
+    else
+    {
+        <a href="@Url.Action("Index","TaiKhoans")">
+            <div class="card">
+                <div class="iconBx">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                </div>
+                <div>
+                    <div class="numbers">Quản lý Tài khoản</div>
+
+                </div>
+
+
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index","GVCNs")">
+            <div class="card">
+                <div class="iconBx">
+                    <ion-icon name="people-outline"></ion-icon>
+                </div>
+                <div>
+                    <div class="numbers">Quản lý giáo viên chủ nhiệm</div>
+
+                </div>
+
+
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index","Lops")">
+            <div class="card">
+                <div class="iconBx">
+                    <ion-icon name="school-outline"></ion-icon>
+                </div>
+                <div>
+                    <div class="numbers">Quản lý lớp học</div>
+
+                </div>
+
+            </div>
+        </a>
+        <a href="@Url.Action("Index","HocSinhs")">
+            <div class="card">
+                <div class="iconBx">
+                    <ion-icon name="person-outline"></ion-icon>
+                </div>
+                <div>
+                    <div class="numbers">Quản lý học sinh</div>
+
+                </div>
+
+
+            </div>
+        </a>
+        <a href="@Url.Action("ThiDua","ThiDua")">
+            <div class="card">
+                <div class="iconBx">
+                    <ion-icon name="medal-outline"></ion-icon>
+                </div>
+                <div>
+                    <div class="numbers">Quản lý thi đua</div>
+
+                </div>
+
+
+            </div>
+        </a>
+        <a href="@Url.Action("Index","DanhGias")">
+            <div class="card">
+                <div class="iconBx">
+                    <ion-icon name="flag-outline"></ion-icon>
+                </div>
+                <div>
+                    <div class="numbers">Đánh Giá</div>
+
+                </div>
+
+
+            </div>
+        </a>
+
+    }
+
+</div>
+<!-- ====== ionicons ======= -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    function showNotification(message) {
+        var alertElement = document.createElement('div');
+        alertElement.classList.add('alert', 'alert-success');
+        alertElement.textContent = message;
+        document.getElementById('alert-container').appendChild(alertElement);
+
+       
+        setTimeout(function () {
+            alertElement.classList.add('alert-hide');
+            setTimeout(function () {
+                alertElement.remove();
+            }, 500);
+        }, 5000);
+    }
+
+   
+    showNotification('Đăng nhập thành công!');
+</script>

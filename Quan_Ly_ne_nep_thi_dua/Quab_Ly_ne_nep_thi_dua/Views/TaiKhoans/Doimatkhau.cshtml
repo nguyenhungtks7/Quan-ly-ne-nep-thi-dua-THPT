@@ -1,0 +1,100 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.Updatepassword
+@{
+    ViewBag.Title = "Doimatkhau";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .text-danger {
+        list-style: none;
+    }
+    #alert-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .alert {
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        background: linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61));
+        color: #fff;
+        border-color: #c3e6cb;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+
+    .alert-hide {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+</style>
+<link href="~/Content/assets/css/giaodiencreateupdate.css" rel="stylesheet" />
+@if (TempData["Doimatkhauthanhcong"] != null && (bool)TempData["Doimatkhauthanhcong"])
+{
+    <div id="alert-container"></div>
+    <script>
+        function showNotification(message) {
+            var alertElement = document.createElement('div');
+            alertElement.classList.add('alert', 'alert-success');
+            alertElement.textContent = message;
+            document.getElementById('alert-container').appendChild(alertElement);
+
+            setTimeout(function () {
+                alertElement.classList.add('alert-hide');
+                setTimeout(function () {
+                    alertElement.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        showNotification('Đổi mật khẩu thành công!');
+    </script>
+}
+<h2>Đổi mật khẩu</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentPassword, htmlAttributes: new { @class = "control-label" })
+            @Html.PasswordFor(model => model.CurrentPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CurrentPassword, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewPassword, htmlAttributes: new { @class = "control-label" })
+            @Html.PasswordFor(model => model.NewPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label" })
+            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <button type="submit" class="btn btn-primary">Đổi mật khẩu </button>
+
+    </div>
+}

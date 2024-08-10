@@ -1,0 +1,90 @@
+﻿/* Style cho h3 */
+@import url('giaodiendelete.css');
+h3 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Style cho dl */
+dl {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+/* Style cho dt */
+dt {
+    font-weight: bold;
+}
+
+/* Style cho dd */
+dd {
+    margin-left: 0;
+    margin-bottom: 10px;
+}
+
+/* Style cho nút Xóa */
+.btn {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    float: right;
+}
+
+    .btn:hover {
+        background-color: #c82333;
+    }
+
+
+.backlist {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius:4px;
+    border: none;
+    transition: background-color 0.3s ease;
+    margin-top: 50px;
+}
+
+    .backlist:hover {
+        background-color: #0056b3;
+    }
+
+    .backlist::before {
+        content: "\2190";
+        font-size: 20px;
+        margin-right: 5px;
+    }
+
+h3, h2, .formkk {
+    padding-left: 31px;
+    margin: 17px;
+}
+
+.edit-button {
+    background-color: #ffc107; 
+    color: #212529; 
+    padding: 8px 16px; 
+    border: none;
+    border-radius: 4px;
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block;
+    transition: background-color 0.3s ease; 
+    float:right;
+}
+
+    .edit-button:hover {
+        background-color: #ffc107; 
+        color: #fff
+    }

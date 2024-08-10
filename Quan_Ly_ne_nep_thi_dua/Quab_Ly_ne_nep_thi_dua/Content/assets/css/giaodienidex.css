@@ -1,0 +1,252 @@
+﻿
+.table {
+    width: 98%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    
+}
+.table-bang{
+    padding: 0 10px 0 40px;
+}
+.table th {
+    background-color: #6495ED;
+    color: white;
+    text-align: left;
+    padding: 12px;
+}
+
+    .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .table tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+
+
+    .table td {
+        padding: 12px;
+    }
+
+
+    .table a {
+        color: #007bff;
+        text-decoration: none;
+        margin-right: 5px;
+        padding: 6px 12px;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+
+
+        .table a:hover {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+            text-decoration: none;
+        }
+
+
+.create-button {
+    background-color: #4169E1;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+    .create-button:hover {
+        background-color: #00008B;
+        color: white;
+        text-decoration: none;
+    }
+
+h2 {
+    color: #2F66CD;
+ 
+    margin: 20px 0 20px 23px;
+    text-align: left;
+   
+}
+.search2 {
+    margin: 0 auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #777;
+    width: 80%;
+}
+
+    .search2 input[type="text"] {
+        width: 200px;
+        padding: 8px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box; /* Đảm bảo kích thước của ô input tính cả padding và border */
+    }
+
+    .search2 input[type="text"] {
+        width: 200px;
+        padding: 8px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box; /* Đảm bảo kích thước của ô input tính cả padding và border */
+    }
+
+    .search2 .form-control {
+        padding: 8px 15px;
+        border: 1px solid #777;
+        border-radius: 4px;
+        /* Màu nền của nút */
+
+        color: black;
+        cursor: pointer;
+    }
+
+        .search2 .form-control:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px #007bff;
+        }
+
+.btn-primary {
+    background-color: #007bff; /* Màu nền của nút */
+    border-color: #007bff; /* Màu viền của nút */
+    color: #fff; /* Màu chữ của nút */
+    padding: 8px 15px; /* Kích thước padding của nút */
+    border-radius: 4px; /* Độ cong của góc */
+    cursor: pointer; /* Con trỏ khi di chuột */
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Màu nền của nút khi di chuột */
+        border-color: #0056b3; /* Màu viền của nút khi di chuột */
+    }
+
+    .btn-primary:focus {
+        outline: none; /* Loại bỏ viền khi nút được focus */
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); /* Hiển thị hiệu ứng khi nút được focus */
+    }
+
+    .btn-primary:active {
+        background-color: #0056b3; /* Màu nền của nút khi được click */
+        border-color: #0056b3; /* Màu viền của nút khi được click */
+    }
+
+
+/* Focus state cho input */
+.search2 input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px #007bff;
+}
+
+.phantrang {
+    
+    margin-left:10px;
+}
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+    .pagination li {
+        display: inline;
+    }
+
+        .pagination li a,
+        .pagination li span {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #428bca;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        .pagination li:first-child a {
+            margin-left: 0;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .pagination li:last-child a {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .pagination li.active span {
+            z-index: 2;
+            color: #fff;
+            cursor: default;
+            background-color: #428bca;
+            border-color: #428bca;
+        }
+
+        .pagination li.disabled span,
+        .pagination li.disabled a,
+        .pagination li.disabled a:hover,
+        .pagination li.disabled a:focus {
+            color: #777;
+            cursor: not-allowed;
+            background-color: #fff;
+            border-color: #ddd;
+        }
+
+        .pagination li a:hover,
+        .pagination li a:focus {
+            z-index: 2;
+            color: #2a6496;
+            background-color: #eee;
+            border-color: #ddd;
+        }
+
+        /* Định dạng cho phần số trang */
+        .pagination li a,
+        .pagination li span {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border: 1px solid #ddd;
+            line-height: 1.42857143;
+            text-decoration: none;
+            color: #337ab7;
+            background-color: #fff;
+        }
+
+        .pagination li.active span,
+        .pagination li.active a,
+        .pagination li.active a:hover,
+        .pagination li.active a:focus {
+            z-index: 2;
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #337ab7;
+            cursor: default;
+        }
+
+        .pagination li.disabled span,
+        .pagination li.disabled a,
+        .pagination li.disabled a:hover,
+        .pagination li.disabled a:focus {
+            color: #777;
+            cursor: not-allowed;
+            background-color: #fff;
+            border-color: #ddd;
+        }

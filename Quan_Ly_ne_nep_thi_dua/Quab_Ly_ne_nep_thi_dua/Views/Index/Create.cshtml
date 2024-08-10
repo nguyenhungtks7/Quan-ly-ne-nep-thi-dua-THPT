@@ -1,0 +1,159 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.ViPham
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutTrangchu.cshtml";
+}
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+@*<link href="~/Content/assets/css/giaodiencreateupdate.css" rel="stylesheet" />*@
+
+<div class="container mb-xxl-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <h2 class="mb-5">Thêm vi phạm</h2>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("Lớp", htmlAttributes: new { @class = "control-label ml-3 ml-3" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("IdLop", ViewBag.LopList as SelectList, "Chọn tên lớp", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessage("IdLop", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdHocSinh, "Học sinh", htmlAttributes: new { @class = "control-label ml-3 ml-3" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("IdHocSinh", Enumerable.Empty<SelectListItem>(), "Chọn học sinh", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdHocSinh, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LoaiViPham, htmlAttributes: new { @class = "control-label ml-3 ml-3" })
+                        <div class="col-md-12">
+                            @Html.DropDownListFor(model => model.LoaiViPham, new SelectList(
+                         new[]
+                         {
+                            new { Value = "Nghỉ học có phép (loại trừ phải nằm viện)", Text = "Nghỉ học có phép (loại trừ phải nằm viện)" },
+                            new { Value = "Học sinh đi học muộn", Text = "Học sinh đi học muộn" },
+                            new { Value = "Học sinh nói tục, chửi bậy", Text = "Học sinh nói tục, chửi bậy" },
+                            new { Value = "Lớp trực ban muộn", Text = "Lớp trực ban muộn" },
+                            new { Value = "Gian lận trong thi cử, kiểm tra", Text = "Gian lận trong thi cử, kiểm tra" }
+                        },
+                         "Value", "Text"
+                     ), "Chọn loại vi phạm", htmlAttributes: new { @class = "form-control", id = "ddlLoaiViPham" })
+                            @Html.ValidationMessageFor(model => model.LoaiViPham, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MoTaViPham, htmlAttributes: new { @class = "control-label ml-3 ml-3" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.MoTaViPham, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MoTaViPham, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NgayViPham, htmlAttributes: new { @class = "control-label ml-3 ml-3" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.NgayViPham, new { htmlAttributes = new { @class = "form-control", type = "date", id = "NgayViPham" } })
+                            @Html.ValidationMessageFor(model => model.NgayViPham, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TenTuan, htmlAttributes: new { @class = "control-label ml-3 ml-3" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("TenTuan", Enumerable.Range(1, 20).Select(i => new SelectListItem { Text = "Tuần " + i, Value = i.ToString() }), "Chọn tuần", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TenTuan, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label ml-3 ml-3">Điểm trừ</label>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.DiemTru, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.DiemTru, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+             </div>
+
+
+               
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-12 justify-content-between">
+
+                        <a href="@Url.Action("Timkiemvipham", "Index")" class="btn btn-secondary" style="text-decoration: none;"><i class="fas fa-arrow-left"></i> Quay lại</a>
+                        <button type="submit" id="su" class="btn btn-primary"><i class="fas fa-save"></i> Lưu</button>
+
+                    </div>
+                </div>
+            </div>
+            }
+
+            
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#IdLop").change(function () {
+            var selectedLop = $(this).val();
+            $.ajax({
+                url: '@Url.Action("GetHocSinhsByLop", "ViPhams")',
+                type: 'GET',
+                data: { idLop: selectedLop },
+                success: function (data) {
+                    // Xóa tất cả các option hiện có trong dropdownlist học sinh
+                    $('#IdHocSinh').empty();
+                    // Thêm các option mới từ danh sách học sinh
+                    $.each(data, function (index, item) {
+                        $('#IdHocSinh').append($('<option>', {
+                            value: item.Value,
+                            text: item.Text
+                        }));
+                    });
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $("#ddlLoaiViPham").change(function () {
+            var selectedValue = $(this).val();
+            if (selectedValue == "Nghỉ học có phép (loại trừ phải nằm viện)") {
+                selectedValue = -1;
+            } else if (selectedValue == "Học sinh đi học muộn") {
+                selectedValue = -2;
+            }
+            else if (selectedValue == "Học sinh nói tục, chửi bậy") {
+                selectedValue = -5;
+            }
+            else if (selectedValue == "Lớp trực ban muộn") {
+                selectedValue = -10;
+            }
+            else if (selectedValue == "Gian lận trong thi cử, kiểm tra") {
+                selectedValue = -20;
+            }
+            else {
+                selectedValue = 0;
+            }
+            $("#DiemTru").val(selectedValue);
+        });
+    });
+
+</script>

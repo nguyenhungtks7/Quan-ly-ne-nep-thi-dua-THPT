@@ -1,0 +1,146 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Create";
+}
+<link href="~/Content/assets/css/giaodiencreateupdate.css" rel="stylesheet" />
+<h2>Tạo tài khoản</h2>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenDangNhap, htmlAttributes: new { @class = "control-label" }) <span style="color: red"> *</span>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenDangNhap, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên đăng nhập" } })
+                @Html.ValidationMessageFor(model => model.TenDangNhap, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MatKhau, htmlAttributes: new { @class = "control-label" })<span style="color: red"> *</span>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control", type = "password", id = "password", placeholder = "Mật khẩu" } })
+                @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+            </div>
+            @*<div style="margin-bottom:10px" class="col-md-2">
+                    <input type="checkbox" onclick="" id="showPasswordCheckbox" /> <span style="font-size:13px;" id="passwordToggleText">Hiện/Ẩn mật khẩu</span>
+                </div>*@
+
+        </div>
+        <div class="form-group" style="margin-bottom:20px">
+            @Html.Label("Nhập lại mật khẩu", htmlAttributes: new { @class = "control-label"})<span style="color: red"> *</span>
+            <div class="col-md-10">
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Nhập lại mật khẩu" />
+                <span id="passwordMatch" class="text-danger"></span>
+
+            </div>
+            <div class="col-md-10 col-md-offset-2">
+                <input type="checkbox" id="showPasswordCheckbox" onclick="TogglePasswordVisibility()" />
+                <label style="margin-bottom:10px;font-size:13px;" for="showPasswordCheckbox">Hiện/Ẩn</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuyenTruyCap, htmlAttributes: new { @class = "control-label" })<span style="color: red"> *</span>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.QuyenTruyCap, new SelectList(
+                    new List<Object>{
+                        new { value = 1 , text = "Quản Trị"},
+                        new { value = 2 , text = "Lớp Trực Ban"},
+                        new { value = 3 , text = "Giáo Viên"},
+                        new { value = 4 , text = "Ban Giám Hiệu"}
+                    },
+                    "value",
+                    "text",
+              null
+                ), "-- Chọn Vai Trò --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.QuyenTruyCap, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TrangThai, htmlAttributes: new { @class = "control-label" })<span style="color: red"> *</span>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TrangThai, new SelectList(
+                    new List<Object>{
+                        new { value = true , text = "Hoạt động"},
+                        new { value = false , text = "Không hoạt động"}
+                    },
+                    "value",
+                    "text",
+                  null
+                ), "-- Chọn trạng thái --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lưu" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="container">
+    <p>
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary backlist float-left" })
+    </p>
+</div>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+<script>
+    $(document).ready(function () {
+        // Function to check password match
+        function checkPasswordMatch() {
+            var password = $("#password").val();
+            var confirmPassword = $("#confirmPassword").val();
+
+            if (password === confirmPassword) {
+                $("#passwordMatch").html("Mật khẩu trùng khớp").css("color", "green");
+                return true;
+            } else {
+                $("#passwordMatch").html("Mật khẩu không trùng khớp").css("color", "red");
+                return false;
+            }
+        }
+
+        // Trigger checkPasswordMatch function on keyup event
+        $("#password, #confirmPassword").on("keyup", function () {
+            checkPasswordMatch();
+        });
+
+        // Intercept form submission and check password match
+        $("form").submit(function (event) {
+            if (!checkPasswordMatch()) {
+                event.preventDefault();
+                alert("Mật khẩu không trùng khớp. Vui lòng kiểm tra lại.");
+            }
+        });
+
+        // Toggle password visibility
+        $("#showPasswordCheckbox").click(function () {
+            var passwordField = $("#password");
+            var confirmPasswordField = $("#confirmPassword");
+
+            if ($(this).prop("checked")) {
+                passwordField.attr("type", "text");
+                confirmPasswordField.attr("type", "text");
+            } else {
+                passwordField.attr("type", "password");
+                confirmPasswordField.attr("type", "password");
+            }
+        });
+    });
+
+</script>

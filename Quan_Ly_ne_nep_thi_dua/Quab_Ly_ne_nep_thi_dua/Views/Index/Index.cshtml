@@ -1,0 +1,78 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutTrangchu.cshtml";
+}
+
+<style>
+    .alert-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        transition: opacity 0.5s ease-in-out;
+        opacity: 0; /* Mặc định ẩn */
+    }
+
+    .alert-show {
+        opacity: 1; /* Hiển thị */
+    }
+    .card-img-top {
+        height: 180px; /* Đặt chiều cao cố định cho hình ảnh */
+        object-fit: cover; /* Đảm bảo hình ảnh được căn chỉnh và bao phủ khu vực quy định */
+    }
+</style>
+
+@if (TempData["DangNhapThanhCong"] != null && (bool)TempData["DangNhapThanhCong"])
+{
+    <div id="alert-container" class="alert-container">
+        <div class="alert alert-success" style="color:aliceblue; background: linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61));" role="alert">
+            Đăng nhập thành công!
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById('alert-container').classList.remove('alert-show');
+        }, 5000);
+        document.getElementById('alert-container').classList.add('alert-show');
+    </script>
+}
+<div class="container justify-content-center" style="padding: 130px 0">
+    <div class="row">
+        <div class="col-md-4 mt-3">
+            <a href="@Url.Action("Timkiemvipham", "Index")" class="card">
+                <img class="card-img-top" src="~/Content/assets/imgs/cach-moi-de-tra-cuu-bhxh_0204112908.jpg" alt="Tra cứu vi phạm">
+                <div class="card-body">
+               
+                    <h5 class="card-title text-center">Tra cứu vi phạm</h5>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 mt-3">
+            <a href="@Url.Action("Tracuudiemthidua", "Index")" class="card">
+                <img class="card-img-top" src="~/Img/tracuudiem.jpg" alt="Tra cứu điểm thi đua">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Tra cứu thi đua - đánh giá</h5>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 mt-3">
+            <a href="@Url.Action("Lienhe", "Index")" class="card">
+                <img class="card-img-top" src="~/Img/Thongtin_lienhe.jpg" alt="Thông tin liên hệ">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Thông tin liên hệ</h5>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

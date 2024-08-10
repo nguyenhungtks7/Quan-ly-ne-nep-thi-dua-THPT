@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QL_nenepthiduaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DanhGia">
+    <Key>
+      <PropertyRef Name="IdDanhGia" />
+    </Key>
+    <Property Name="IdDanhGia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdLop" Type="Int32" />
+    <Property Name="TongDiem" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="XepLoai" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Lop" Relationship="Self.FK__DanhGia__IdLop__59063A47" FromRole="DanhGia" ToRole="Lop" />
+    <Property Name="Tuan" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Thang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="HocKy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DiemHocTap">
+    <Key>
+      <PropertyRef Name="IdDiemht" />
+    </Key>
+    <Property Name="IdDiemht" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdLop" Type="Int32" />
+    <Property Name="DiemHocTap1" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
+    <Property Name="Tuan" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Thang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="HocKy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Lop" Relationship="Self.FK__DiemHocTa__IdLop__5BE2A6F2" FromRole="DiemHocTap" ToRole="Lop" />
+    <Property Name="Diemgiotot" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Diemgiotb" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Diemgioyeu" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Diemgiokem" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Diemtotsdb" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Diemkemsdb" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="DiemNeNep">
+    <Key>
+      <PropertyRef Name="IdDiemnn" />
+    </Key>
+    <Property Name="IdDiemnn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdLop" Type="Int32" />
+    <Property Name="DiemNeNep1" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
+    <Property Name="Tuan" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Thang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="HocKy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Lop" Relationship="Self.FK__DiemNeNep__IdLop__5EBF139D" FromRole="DiemNeNep" ToRole="Lop" />
+  </EntityType>
+  <EntityType Name="GVCN">
+    <Key>
+      <PropertyRef Name="IdGVCN" />
+    </Key>
+    <Property Name="IdGVCN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HoTenGVCN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GioiTinh" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Lops" Relationship="Self.FK__Lop__IdGVCN__534D60F1" FromRole="GVCN" ToRole="Lop" />
+  </EntityType>
+  <EntityType Name="HocSinh">
+    <Key>
+      <PropertyRef Name="IdHocSinh" />
+    </Key>
+    <Property Name="IdHocSinh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HoTenHocSinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <Property Name="GioiTinh" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdLop" Type="Int32" />
+    <NavigationProperty Name="Lop" Relationship="Self.FK__HocSinh__IdLop__5629CD9C" FromRole="HocSinh" ToRole="Lop" />
+    <NavigationProperty Name="ViPhams" Relationship="Self.FK__ViPham__IdHocSin__6383C8BA" FromRole="HocSinh" ToRole="ViPham" />
+  </EntityType>
+  <EntityType Name="Lop">
+    <Key>
+      <PropertyRef Name="IdLop" />
+    </Key>
+    <Property Name="IdLop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenLop" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="IdGVCN" Type="Int32" />
+    <NavigationProperty Name="DanhGias" Relationship="Self.FK__DanhGia__IdLop__59063A47" FromRole="Lop" ToRole="DanhGia" />
+    <NavigationProperty Name="DiemHocTaps" Relationship="Self.FK__DiemHocTa__IdLop__5BE2A6F2" FromRole="Lop" ToRole="DiemHocTap" />
+    <NavigationProperty Name="DiemNeNeps" Relationship="Self.FK__DiemNeNep__IdLop__5EBF139D" FromRole="Lop" ToRole="DiemNeNep" />
+    <NavigationProperty Name="GVCN" Relationship="Self.FK__Lop__IdGVCN__534D60F1" FromRole="Lop" ToRole="GVCN" />
+    <NavigationProperty Name="HocSinhs" Relationship="Self.FK__HocSinh__IdLop__5629CD9C" FromRole="Lop" ToRole="HocSinh" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TaiKhoan">
+    <Key>
+      <PropertyRef Name="IdTaiKhoan" />
+    </Key>
+    <Property Name="IdTaiKhoan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="QuyenTruyCap" Type="Int32" />
+    <Property Name="TrangThai" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ViPham">
+    <Key>
+      <PropertyRef Name="IdViPham" />
+    </Key>
+    <Property Name="IdViPham" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdHocSinh" Type="Int32" />
+    <Property Name="LoaiViPham" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MoTaViPham" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NgayViPham" Type="DateTime" Precision="0" />
+    <Property Name="TenTuan" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DiemTru" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="HocSinh" Relationship="Self.FK__ViPham__IdHocSin__6383C8BA" FromRole="ViPham" ToRole="HocSinh" />
+    <Property Name="Thang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="HocKy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__DanhGia__IdLop__59063A47">
+    <End Role="Lop" Type="Self.Lop" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lop">
+        <PropertyRef Name="IdLop" />
+      </Principal>
+      <Dependent Role="DanhGia">
+        <PropertyRef Name="IdLop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DiemHocTa__IdLop__5BE2A6F2">
+    <End Role="Lop" Type="Self.Lop" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DiemHocTap" Type="Self.DiemHocTap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lop">
+        <PropertyRef Name="IdLop" />
+      </Principal>
+      <Dependent Role="DiemHocTap">
+        <PropertyRef Name="IdLop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DiemNeNep__IdLop__5EBF139D">
+    <End Role="Lop" Type="Self.Lop" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DiemNeNep" Type="Self.DiemNeNep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lop">
+        <PropertyRef Name="IdLop" />
+      </Principal>
+      <Dependent Role="DiemNeNep">
+        <PropertyRef Name="IdLop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Lop__IdGVCN__534D60F1">
+    <End Role="GVCN" Type="Self.GVCN" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Lop" Type="Self.Lop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GVCN">
+        <PropertyRef Name="IdGVCN" />
+      </Principal>
+      <Dependent Role="Lop">
+        <PropertyRef Name="IdGVCN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HocSinh__IdLop__5629CD9C">
+    <End Role="Lop" Type="Self.Lop" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="HocSinh" Type="Self.HocSinh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lop">
+        <PropertyRef Name="IdLop" />
+      </Principal>
+      <Dependent Role="HocSinh">
+        <PropertyRef Name="IdLop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ViPham__IdHocSin__6383C8BA">
+    <End Role="HocSinh" Type="Self.HocSinh" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ViPham" Type="Self.ViPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HocSinh">
+        <PropertyRef Name="IdHocSinh" />
+      </Principal>
+      <Dependent Role="ViPham">
+        <PropertyRef Name="IdHocSinh" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QL_nenepthiduaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DanhGias" EntityType="Self.DanhGia" />
+    <EntitySet Name="DiemHocTaps" EntityType="Self.DiemHocTap" />
+    <EntitySet Name="DiemNeNeps" EntityType="Self.DiemNeNep" />
+    <EntitySet Name="GVCNs" EntityType="Self.GVCN" />
+    <EntitySet Name="HocSinhs" EntityType="Self.HocSinh" />
+    <EntitySet Name="Lops" EntityType="Self.Lop" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+    <EntitySet Name="ViPhams" EntityType="Self.ViPham" />
+    <AssociationSet Name="FK__DanhGia__IdLop__59063A47" Association="Self.FK__DanhGia__IdLop__59063A47">
+      <End Role="Lop" EntitySet="Lops" />
+      <End Role="DanhGia" EntitySet="DanhGias" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DiemHocTa__IdLop__5BE2A6F2" Association="Self.FK__DiemHocTa__IdLop__5BE2A6F2">
+      <End Role="Lop" EntitySet="Lops" />
+      <End Role="DiemHocTap" EntitySet="DiemHocTaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DiemNeNep__IdLop__5EBF139D" Association="Self.FK__DiemNeNep__IdLop__5EBF139D">
+      <End Role="Lop" EntitySet="Lops" />
+      <End Role="DiemNeNep" EntitySet="DiemNeNeps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Lop__IdGVCN__534D60F1" Association="Self.FK__Lop__IdGVCN__534D60F1">
+      <End Role="GVCN" EntitySet="GVCNs" />
+      <End Role="Lop" EntitySet="Lops" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HocSinh__IdLop__5629CD9C" Association="Self.FK__HocSinh__IdLop__5629CD9C">
+      <End Role="Lop" EntitySet="Lops" />
+      <End Role="HocSinh" EntitySet="HocSinhs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ViPham__IdHocSin__6383C8BA" Association="Self.FK__ViPham__IdHocSin__6383C8BA">
+      <End Role="HocSinh" EntitySet="HocSinhs" />
+      <End Role="ViPham" EntitySet="ViPhams" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

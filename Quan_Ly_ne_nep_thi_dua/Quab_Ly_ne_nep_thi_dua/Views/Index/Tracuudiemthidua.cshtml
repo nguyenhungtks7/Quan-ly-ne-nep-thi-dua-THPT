@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "Tracuudiemthidua";
+    Layout = "~/Views/Shared/_LayoutTrangchu.cshtml";
+}
+
+
+
+@model IPagedList<Quab_Ly_ne_nep_thi_dua.Models.XepLoaiDanhGiaTongDiemcualop>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/assets/css/Trangchutracuuthiduadanhgia.css" rel="stylesheet" />
+
+<div class="breadcrumb">
+    <a href="@Url.Action("Index", "Index")">Trang chủ</a>
+    <span>&gt;</span>
+    <span>Tra cứu thi đua - đánh giá</span>
+</div>
+
+<h2 style="text-align:center; margin-bottom: 20px"> Tra cứu thi đua - đánh giá</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+        @{
+            var lopList = ViewBag.LopList as SelectList;
+        }
+        <div class="col-md-2">
+            <label for="searchLop" class="form-label">Lớp học</label>
+            @Html.DropDownList("searchLop", lopList, "Chọn lớp", new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-3">
+            <label for="searchLop" class="form-label">Năm học</label>
+            @Html.DropDownList("NamHoc", Enumerable.Range(DateTime.Now.Year - 5, 20).Select(x => new SelectListItem { Text = $"{x} - {x + 1}", Value = $"{x} - {x + 1}" }), "Chọn năm", new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-3">
+            <label for="searchLop" class="form-label">Học Kỳ</label>
+            @Html.DropDownList("HocKy", new List<SelectListItem>
+                    {
+                new SelectListItem { Text = "Học kỳ 1", Value = "Học kỳ 1" },
+                new SelectListItem { Text = "Học kỳ 2", Value = "Học kỳ 2" }
+                    }, "Chọn học kỳ", htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-2">
+            <label for="searchLop" class="form-label">Tháng</label>
+            @Html.DropDownList("Thang", Enumerable.Range(1, 12).Select(i => new SelectListItem { Text = "Tháng " + i, Value = i.ToString() }), "Chọn tháng", htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-2">
+            <label for="searchLop" class="form-label">Tuần</label>
+            @Html.DropDownList("Tuan", Enumerable.Range(1, 20).Select(i => new SelectListItem { Text = "Tuần " + i, Value = i.ToString() }), "Chọn tuần", htmlAttributes: new { @class = "form-control" })
+        </div>
+        
+    </div>
+    <div class="row justify-content-center  mb-5">
+        <div class="col-md-12">
+            <label class="invisible">Placeholder</label>
+            <div class="text-center d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary mt-4">
+                    <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+                <button class="btn btn-secondary mt-4 ms-2 ml-2" id="clearFilters">
+                    <i class="fas fa-sync-alt"></i> Bỏ lọc
+                </button>
+            </div>
+        </div>
+    </div>
+
+}
+
+@if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        <p style="color:red; text-align:center">  @ViewBag.ErrorMessage</p>
+    </div>
+}
+
+@using (Html.BeginForm("LuuDanhGia", "DanhGias", FormMethod.Post))
+{
+ <div class="table-responsive">
+     <table class="table  table-hover">
+         <thead>
+             <tr>
+                 <th>STT</th>
+                 <th>Lớp</th>
+                 <th>Điểm học tập</th>
+                 <th>Điểm nề nếp</th>
+                 <th>Tổng điểm</th>
+                 <th>Xếp loại</th>
+                 <th>Tuần</th>
+                 <th>Tháng</th>
+                 <th>Kỳ học</th>
+                 <th>Năm học</th>
+                 <th></th>
+             </tr>
+         </thead>
+         <tbody>
+             @{
+                 var stt = 0;
+             }
+             @foreach (var item in Model)
+             {
+                 stt++;
+                 <tr>
+                     <td>@stt</td>
+                     <td>@item.Lop</td>
+                     <td class="diem-hoc-tap">@item.DiemHocTap</td>
+                     <td class="diem-ne-nep">@item.DiemNeNep</td>
+                     <td class="total-points">@item.TotalPoints</td>
+                     <td class="xep-loai">@item.Xeploai</td>
+                     <td>@item.Tuan</td>
+                     <td>@item.Thang</td>
+                     <td>@item.HocKy</td>
+                     <td>@item.NamHoc</td>
+                 </tr>
+             }
+         </tbody>
+     </table>
+ </div>
+     }
+
+     <div class="phantrang">
+         <div class="row justify-content-center">
+             <div class="col-12">
+                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchTitle = Request.QueryString["searchTitle"] }))
+             </div>
+         </div>
+     </div>
+
+     <script>
+         document.addEventListener("DOMContentLoaded", function () {
+             document.getElementById("clearFilters").addEventListener("click", function () {
+                 // Lấy ra tất cả các input và select trong form
+                 var formInputs = document.querySelectorAll('input[type="text"], input[type="date"], select');
+
+                 // Duyệt qua từng phần tử để reset giá trị
+                 formInputs.forEach(function (input) {
+                     input.value = ""; // Reset giá trị về rỗng
+                 });
+
+                 // Gửi form để xóa bộ lọc
+                 document.querySelector('form').submit();
+             });
+         });
+     </script>

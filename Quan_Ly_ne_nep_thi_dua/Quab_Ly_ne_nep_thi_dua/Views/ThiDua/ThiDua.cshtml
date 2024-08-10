@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "ThiDua";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a{
+        text-decoration: none;
+    }
+    h2 {
+        margin: 20px 0 20px 23px;
+        text-align: left;
+       
+    }
+</style>
+<h2> Quản lý thi đua</h2>
+
+<div class="cardBox">
+    <a href="@Url.Action("Index","DiemHocTaps")">
+        <div class="card">
+            <div class="iconBx">
+                <ion-icon name="book-outline"></ion-icon> 
+            </div>
+            <div>
+                <div class="numbers">Quản lý điểm học tập</div>
+            </div>
+        </div>
+    </a>
+
+    <a href=" @Url.Action("Index", "DiemNeNeps")">
+        <div class="card">
+            <div class="iconBx">
+                <ion-icon name="clipboard-outline"></ion-icon> 
+            </div>
+            <div>
+                <div class="numbers">Quản lý điểm nề nếp</div>
+            </div>
+        </div>
+    </a>
+
+    <a href="@Url.Action("Index", "ViPhams") ">
+        <div class="card">
+            <div class="iconBx">
+                <ion-icon name="warning-outline"></ion-icon> 
+            </div>
+            <div>
+                <div class="numbers">Quản lý vi phạm</div>
+            </div>
+        </div>
+    </a>
+</div>

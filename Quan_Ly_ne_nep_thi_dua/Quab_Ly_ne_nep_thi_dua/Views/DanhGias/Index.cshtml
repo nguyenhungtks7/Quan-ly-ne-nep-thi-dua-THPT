@@ -1,0 +1,357 @@
+﻿@*@model IEnumerable<Quab_Ly_ne_nep_thi_dua.Models.DanhGia>*@
+@*@model IEnumerable<Quab_Ly_ne_nep_thi_dua.Models.XepLoaiDanhGiaTongDiemcualop>*@
+@model IPagedList<Quab_Ly_ne_nep_thi_dua.Models.XepLoaiDanhGiaTongDiemcualop>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<link href="~/Content/assets/css/giaodienidex.css" rel="stylesheet" />*@
+<style>
+
+
+    /*Phân trang*/
+    phantrang {
+        margin-left: 10px;
+    }
+
+    .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+
+        .pagination li {
+            display: inline;
+        }
+
+            .pagination li a,
+            .pagination li span {
+                position: relative;
+                float: left;
+                padding: 6px 12px;
+                margin-left: -1px;
+                line-height: 1.42857143;
+                color: #428bca;
+                text-decoration: none;
+                background-color: #fff;
+                border: 1px solid #ddd;
+            }
+
+            .pagination li:first-child a {
+                margin-left: 0;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+
+            .pagination li:last-child a {
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+
+            .pagination li.active span {
+                z-index: 2;
+                color: #fff;
+                cursor: default;
+                background-color: #428bca;
+                border-color: #428bca;
+            }
+
+            .pagination li.disabled span,
+            .pagination li.disabled a,
+            .pagination li.disabled a:hover,
+            .pagination li.disabled a:focus {
+                color: #777;
+                cursor: not-allowed;
+                background-color: #fff;
+                border-color: #ddd;
+            }
+
+            .pagination li a:hover,
+            .pagination li a:focus {
+                z-index: 2;
+                color: #2a6496;
+                background-color: #eee;
+                border-color: #ddd;
+            }
+
+            /* Định dạng cho phần số trang */
+            .pagination li a,
+            .pagination li span {
+                display: inline-block;
+                padding: 5px 10px;
+                margin-right: 5px;
+                border: 1px solid #ddd;
+                line-height: 1.42857143;
+                text-decoration: none;
+                color: #337ab7;
+                background-color: #fff;
+            }
+
+            .pagination li.active span,
+            .pagination li.active a,
+            .pagination li.active a:hover,
+            .pagination li.active a:focus {
+                z-index: 2;
+                color: #fff;
+                background-color: #337ab7;
+                border-color: #337ab7;
+                cursor: default;
+            }
+
+            .pagination li.disabled span,
+            .pagination li.disabled a,
+            .pagination li.disabled a:hover,
+            .pagination li.disabled a:focus {
+                color: #777;
+                cursor: not-allowed;
+                background-color: #fff;
+                border-color: #ddd;
+            }
+</style>
+
+<div class="container mt-4">
+
+    <h2>Đánh giá</h2>
+    <div class="table-bang">
+        <div class="thongke mb-4">
+            <a href="@Url.Action("Thongkenam")" class="btn btn-link me-2" style="color: #4CAF50;">
+                <ion-icon name="calendar-outline"></ion-icon> Thống kê báo cáo theo năm
+            </a>
+
+            <a href="@Url.Action("Thongkeki")" class="btn btn-link me-2" style="color: #4CAF50;">
+                <ion-icon name="calendar-outline"></ion-icon> Thống kê báo cáo theo kỳ
+            </a>
+
+            <a href="@Url.Action("ThongkeThang")" class="btn btn-link me-2" style="color: #4CAF50;">
+                <ion-icon name="calendar-outline"></ion-icon> Thống kê báo cáo theo tháng
+            </a>
+
+            <a href="@Url.Action("ThongkeTuan")" class="btn btn-link" style="color: #4CAF50;">
+                <ion-icon name="calendar-outline"></ion-icon> Thống kê báo cáo theo tuần
+            </a>
+        </div>
+        @using (Html.BeginForm())
+        {
+            <div style="background-color: #f8f9fa; padding: 10px; border: 1px solid #dee2e6; border-radius: 10px; ">
+                <div class="row">
+                    @{
+                        var lopList = ViewBag.LopList as SelectList;
+                    }
+                    <div class="col-md-3">
+                        <p class="font-size-16 mb-2"> <b>Lớp học</b></p>
+                        @Html.DropDownList("searchLop", lopList, "Chọn lớp", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-3">
+                        <p class="font-size-16 mb-2"><b>Năm học</b></p>
+                        @Html.DropDownList("NamHoc", Enumerable.Range(DateTime.Now.Year - 5, 20).Select(x => new SelectListItem { Text = $"{x} - {x + 1}", Value = $"{x} - {x + 1}" }), "Chọn năm", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-3">
+                        <p class="font-size-16 mb-2"><b>Học kỳ</b></p>
+                        @Html.DropDownList("HocKy", new List<SelectListItem>
+                                {
+                            new SelectListItem { Text = "Học kỳ 1", Value = "Học kỳ 1" },
+                            new SelectListItem { Text = "Học kỳ 2", Value = "Học kỳ 2" }
+                                }, "Chọn học kỳ", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-3">
+                        <p class="font-size-16 mb-2"><b>Tháng</b></p>
+                        @Html.DropDownList("Thang", Enumerable.Range(1, 12).Select(i => new SelectListItem { Text = "Tháng " + i, Value = i.ToString() }), "Chọn tháng", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-3">
+                        <p class="font-size-16 mb-2"><b>Tuần</b></p>
+                        @Html.DropDownList("Tuan", Enumerable.Range(1, 20).Select(i => new SelectListItem { Text = "Tuần " + i, Value = i.ToString() }), "Chọn tuần", new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-3">
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary me-2 mr-2">
+                            <ion-icon name="search-outline"></ion-icon> Tìm kiếm
+                        </button>
+                        <button class="btn btn-secondary" id="clearFilters">
+                            <ion-icon name="refresh-outline"></ion-icon> Bỏ lọc
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+        @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger" role="alert">
+                <p style="color:red; text-align:center">  @ViewBag.ErrorMessage</p>
+            </div>
+        }
+
+
+
+        @using (Html.BeginForm("LuuDanhGia", "DanhGias", FormMethod.Post))
+        {
+            <table class="table mt-5">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>STT</th>
+                        <th>Lớp</th>
+                        <th>Điểm học tập</th>
+                        <th>Điểm nề nếp</th>
+                        <th>Tổng điểm</th>
+                        <th>Xếp loại</th>
+                        <th>Tuần</th>
+                        <th>Tháng</th>
+                        <th>Kỳ học</th>
+                        <th>Năm học</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var stt = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        stt++;
+                        <tr>
+                            <td>@stt</td>
+                            <td>@item.Lop</td>
+                            <td class="diem-hoc-tap">@item.DiemHocTap</td>
+                            <td class="diem-ne-nep">@item.DiemNeNep</td>
+                            <td class="total-points">@item.TotalPoints</td>
+                            <td class="xep-loai">@item.Xeploai</td>
+                            <td>@item.Tuan</td>
+                            <td>@item.Thang</td>
+                            <td>@item.HocKy</td>
+                            <td>@item.NamHoc</td>
+                            <td >
+                                @if ((Session["bangiamhieu"] != null && (bool)Session["bangiamhieu"]))
+                                {
+
+                                }
+                                else
+                                {
+                                    if (item.IsSaved)
+                                    {
+                                        <div style="display:flex">
+                                            <button type="button" class="btn btn-secondary mr-2"  disabled>Lưu</button>
+                                            <form action="@Url.Action("Capnhap", "DanhGias")" method="post">
+                                                <input type="hidden" name="idLop" value="@item.idLop" />
+                                                <input type="hidden" name="totalPoints" value="@item.TotalPoints" />
+                                                <input type="hidden" name="xepLoai" value="@item.Xeploai" />
+                                                <input type="hidden" name="tuan" value="@item.Tuan" />
+                                                <input type="hidden" name="thang" value="@item.Thang" />
+                                                <input type="hidden" name="hocKy" value="@item.HocKy" />
+                                                <input type="hidden" name="namHoc" value="@item.NamHoc" />
+                                                <button type="submit" class="btn btn-outline-secondary">Cập nhật</button>
+                                            </form>
+                                        </div>
+                                      
+                                    }
+                                    else
+                                    {
+                                        <form action="@Url.Action("LuuDanhGia", "DanhGias")" method="post">
+                                            <input type="hidden" name="idLop" value="@item.idLop" />
+                                            <input type="hidden" name="totalPoints" value="@item.TotalPoints" />
+                                            <input type="hidden" name="xepLoai" value="@item.Xeploai" />
+                                            <input type="hidden" name="tuan" value="@item.Tuan" />
+                                            <input type="hidden" name="thang" value="@item.Thang" />
+                                            <input type="hidden" name="hocKy" value="@item.HocKy" />
+                                            <input type="hidden" name="namHoc" value="@item.NamHoc" />
+                                            <button type="submit" onclick="confirmSubmit()" class="btn btn-primary">Lưu</button>
+                                        </form>
+                                    }
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+
+    <div class="phantrang">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchTitle = Request.QueryString["searchTitle"] }))
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function confirmSubmit() {
+        if (confirm("Bạn chắc chắn muốn lưu không?")) {
+            document.getElementById("myForm").submit();
+        }
+    }
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("clearFilters").addEventListener("click", function () {
+            // Lấy ra tất cả các input và select trong form
+            var formInputs = document.querySelectorAll('input[type="text"], input[type="date"], select');
+
+            // Duyệt qua từng phần tử để reset giá trị
+            formInputs.forEach(function (input) {
+                input.value = ""; // Reset giá trị về rỗng
+            });
+
+            // Gửi form để xóa bộ lọc
+            document.querySelector('form').submit();
+        });
+    });
+</script>
+
+@*<h2>Đánh giá</h2>
+
+    <p>
+        @Html.ActionLink("+ Thêm đánh giá", "create", null, new { @class = "create-button" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TongDiem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThuTu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.XepLoai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lop.TenLop)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongDiem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThuTu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.XepLoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lop.TenLop)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.IdDanhGia }) |
+                    @Html.ActionLink("Xem", "Details", new { id = item.IdDanhGia }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.IdDanhGia })
+                </td>
+            </tr>
+        }
+
+    </table>*@

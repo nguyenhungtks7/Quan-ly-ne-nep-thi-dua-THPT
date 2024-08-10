@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý nề nếp - thi đua Trường THPT Tiến Thịnh</title>
+    <link rel="shortcut icon" href="~/Content/assets/imgs/logotienthinh.ico" />
+    <!-- ======= Styles ====== -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+
+    <style>
+
+        /* CSS cho phần user */
+        .user {
+            position: relative;
+            display: inline-block;
+        }
+
+
+
+        /* CSS cho phần chứa các tùy chọn */
+        #avatarOptions {
+            display: none; /* Ban đầu ẩn phần tùy chọn */
+            position: absolute;
+            top: 54px;
+            right: 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 12px;
+            margin-right: 16px;
+            border-radius: 5px;
+            z-index: 999;
+        }
+
+            /* CSS cho các tùy chọn */
+            #avatarOptions ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+                #avatarOptions ul li {
+                    margin-bottom: 10px; /* Khoảng cách giữa các tùy chọn */
+                }
+
+                    #avatarOptions ul li a {
+                        text-decoration: none;
+                        color: #333; /* Màu chữ của các tùy chọn */
+                        display: block;
+                    }
+
+
+                    #avatarOptions ul li:hover {
+                        background: #808080;
+                        color: aliceblue;
+                    }
+    </style>
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container2">
+        <div class="navigation active">
+            <ul>
+                <li>
+                    <a href="@Url.Action("Index", "Home")">
+
+
+                        <span class="icon">
+                            <img style="width: 40px; margin-top: 5px; " src="~/Content/assets/imgs/logotienthinh.ico" />
+                            @*<ion-icon name="logo-apple"></ion-icon>*@
+                        </span>
+
+                        <span class="title">Trường THPT Tiến Thịnh</span>
+                    </a>
+                </li>
+                @if (Session["giaovien"] != null && (bool)Session["giaovien"])
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">
+                            <span class="icon">
+                                <ion-icon name="home-outline"></ion-icon>
+                            </span>
+                            <span class="title">Trang chủ</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","GVCNs" )">
+                            <span class="icon">
+                                <ion-icon name="people-outline"></ion-icon>
+                            </span>
+                            <span class="title">Quản lý giáo viên chủ nhiệm</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","Lops")">
+                            <span class="icon">
+                                <ion-icon name="school-outline"></ion-icon>
+                            </span>
+                            <span class="title">Quản lý lớp học</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","HocSinhs")">
+                            <span class="icon">
+                                <ion-icon name="person-outline"></ion-icon>
+                            </span>
+                            <span class="title">Quản lý học sinh</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Dangxuat","Dangnhap")">
+                            <span class="icon">
+                                <ion-icon name="log-out-outline"></ion-icon>
+                            </span>
+                            <span class="title">Đăng xuất</span>
+                        </a>
+                    </li>
+                }
+                else if (Session["bangiamhieu"] != null && (bool)Session["bangiamhieu"])
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">
+                            <span class="icon">
+                                <ion-icon name="home-outline"></ion-icon>
+                            </span>
+                            <span class="title">Trang chủ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","DanhGias")">
+                            <span class="icon">
+                                <ion-icon name="flag-outline"></ion-icon>
+                            </span>
+                            <span class="title">Đánh Giá</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Dangxuat","Dangnhap")">
+                            <span class="icon">
+                                <ion-icon name="log-out-outline"></ion-icon>
+                            </span>
+                            <span class="title">Đăng xuất</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+
+
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">
+                            <span class="icon">
+                                <ion-icon name="home-outline"></ion-icon>
+                            </span>
+                            <span class="title">Trang chủ</span>
+                        </a>
+                    </li>
+                    @*class="hovered"*@
+                    <li>
+
+                        <a href="@Url.Action("Index","TaiKhoans" )">
+                            <span class="icon">
+                                <ion-icon name="person-circle-outline"></ion-icon>
+                            </span>
+                            <span class="title">Quản lý tài khoản</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","GVCNs" )">
+                            <span class="icon">
+                                <ion-icon name="people-outline"></ion-icon>
+                            </span>
+                            <span class="title">Quản lý giáo viên chủ nhiệm</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","Lops")">
+                            <span class="icon">
+                                <ion-icon name="school-outline"></ion-icon>
+                            </span>
+                            <span class="title">Quản lý lớp học</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","HocSinhs")">
+                            <span class="icon">
+                                <ion-icon name="person-outline"></ion-icon>
+                            </span>
+                            <span class="title">Quản lý học sinh</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("ThiDua","ThiDua")">
+                            <span class="icon">
+                                <ion-icon name="medal-outline"></ion-icon>
+                            </span>
+                            <span class="title">Quản lý thi đua</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","DanhGias")">
+                            <span class="icon">
+                                <ion-icon name="flag-outline"></ion-icon>
+                            </span>
+                            <span class="title">Đánh Giá</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Dangxuat","Dangnhap")">
+                            <span class="icon">
+                                <ion-icon name="log-out-outline"></ion-icon>
+                            </span>
+                            <span class="title">Đăng xuất</span>
+                        </a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main active">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                @*<div class="search">
+                        <label>
+                            <input type="text" placeholder="Search here">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </label>
+                    </div>*@
+                <div class="search">
+
+                </div>
+
+                @*<div style="margin-left: 477px;">
+                    @if (Session["Tendangnhap"] != null)
+                    {
+                        <p>Xin chào,  @Session["Tendangnhap"]</p>
+                    }
+                </div>*@
+                <div class="user" onclick="toggleOptions()">
+                    <a id="avatarLink">
+                        <img src="~/Content/assets/imgs/1024px-OOjs_UI_icon_userAvatar-progressive.svg (1).png" id="userAvatar" />
+                    </a>
+                </div>
+                <div id="avatarOptions">
+                    <ul>
+                        <li>
+                            @if (Session["Tendangnhap"] != null)
+                            {
+                                <p>
+                                    @Session["Tendangnhap"]
+                                </p>
+                            }
+                            </li>
+                        <li><a href="@Url.Action("Doimatkhau","TaiKhoans")"> <i class="fas fa-key" aria-hidden="true"></i> Đổi mật khẩu</a></li>
+                        <li><a href="@Url.Action("Dangxuat","Dangnhap")"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Đăng xuất</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+            @RenderBody()
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+    <!-- =========== Scripts =========  -->
+    <script src="~/Content/assets/js/main.js"></script>
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        function toggleOptions() {
+            var options = document.getElementById("avatarOptions");
+            options.style.display = (options.style.display === "none") ? "block" : "none";
+        }
+    </script>
+
+</body>
+
+</html>
+
+

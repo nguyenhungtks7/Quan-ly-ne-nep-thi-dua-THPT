@@ -1,0 +1,63 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.GVCN
+
+@{
+    ViewBag.Title = "Delete";
+}
+<link href="~/Content/assets/css/giaodiendelete.css" rel="stylesheet" />
+
+<h3>Bạn có chắc chắn muốn xóa GVCN này không?</h3>
+<div class="formkk">
+   
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HoTenGVCN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTenGVCN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoDienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoDienThoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiTinh)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> 
+            @Html.ActionLink(" Quay lại", "Index", null, new { @class = "backlist" })
+        </div>
+    }
+</div>

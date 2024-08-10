@@ -1,0 +1,70 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.ViPham
+
+@{
+    ViewBag.Title = "Delete";
+}
+<link href="~/Content/assets/css/giaodiendelete.css" rel="stylesheet" />
+
+<h3> Bạn có chắc chắn muốn xóa vi phạm này không?</h3>
+<div class="formkk">
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiViPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiViPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTaViPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTaViPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayViPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayViPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenTuan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenTuan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiemTru)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiemTru)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HocSinh.HoTenHocSinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HocSinh.HoTenHocSinh)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Xóa" class="btn btn-default" /> 
+    @Html.ActionLink(" Quay lại", "Index", null, new { @class = "backlist" })
+</div>
+    }
+</div>

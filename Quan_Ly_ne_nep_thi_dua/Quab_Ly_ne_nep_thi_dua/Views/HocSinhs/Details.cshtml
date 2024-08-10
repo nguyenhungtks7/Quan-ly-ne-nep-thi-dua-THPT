@@ -1,0 +1,70 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.HocSinh
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<link href="~/Content/assets/css/giaodiendelete.css" rel="stylesheet" />
+
+
+<div class="container">
+    <h2>Thông tin học sinh  @Html.DisplayFor(model => model.HoTenHocSinh)</h2>
+    <div class="formkk">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.HoTenHocSinh)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HoTenHocSinh)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NgaySinh)
+            </dt>
+            <dd>
+                @{
+                    DateTime ngay;
+                    if (Model.NgaySinh is DateTime)
+                    {
+                        ngay = (DateTime)Model.NgaySinh;
+                    }
+                    else
+                    {
+                        ngay = DateTime.MinValue;
+                    }
+                }
+                @ngay.ToString("dd/MM/yyyy")
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.GioiTinh)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.GioiTinh)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Lop.TenLop)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Lop.TenLop)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.IdHocSinh }, new { @class = "btn btn-primary edit-button" })
+    </p>
+    <p>
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary backlist float-left" })
+    </p>
+</div>

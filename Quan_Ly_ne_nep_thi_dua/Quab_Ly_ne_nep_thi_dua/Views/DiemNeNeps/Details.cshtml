@@ -1,0 +1,73 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.DiemNeNep
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="~/Content/assets/css/giaodiendelete.css" rel="stylesheet" />
+<div class="container">
+    <h2>Thông tin điểm nề nếp lớp @Html.DisplayFor(model => model.Lop.TenLop)</h2>
+    <div class="formkk">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DiemNeNep1)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DiemNeNep1)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NgayCapNhat)
+            </dt>
+            <dd>
+                @{
+                    DateTime ngay;
+                    if (Model.NgayCapNhat is DateTime)
+                    {
+                        ngay = (DateTime)Model.NgayCapNhat;
+                    }
+                    else
+                    {
+                        ngay = DateTime.MinValue;
+                    }
+                }
+                @ngay.ToString("dd/MM/yyyy")
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Tuan)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Tuan)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Thang)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Thang)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.HocKy)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HocKy)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NamHoc)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NamHoc)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Lop.TenLop)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Lop.TenLop)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.IdDiemnn }, new { @class = "btn btn-primary edit-button" })
+    </p>
+    <p>
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary backlist float-left" })
+    </p>
+</div>

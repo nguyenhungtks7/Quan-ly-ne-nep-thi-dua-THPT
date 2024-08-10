@@ -1,0 +1,75 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Content/assets/css/giaodiendelete.css" rel="stylesheet" />
+<h2>Thông tin tài khoản   @Html.DisplayFor(model => model.TenDangNhap)</h2>
+<div class="container">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDangNhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDangNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </dt>
+
+        <dd>
+            ********
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuyenTruyCap)
+        </dt>
+
+        <dd>
+            @if (Model.QuyenTruyCap == 1)
+            {
+                <p class="text-primary">Quản trị</p>
+            }
+            else if (Model.QuyenTruyCap == 2)
+            {
+                <p class="text-info">Lớp trực ban</p>
+            }
+            else if (Model.QuyenTruyCap == 3)
+            {
+                <p class="text-success">Giáo viên</p>
+            }
+            else if (Model.QuyenTruyCap == 4)
+            {
+                <p class="text-warning">Ban giám hiệu</p>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+
+        <dd>
+            @if (Model.TrangThai == true)
+            {
+                <p class="text-success">Hoạt động</p>
+            }
+            else
+            {
+                <p class="text-danger">Không hoạt động</p>
+            }
+        </dd>
+
+    </dl>
+</div>
+
+<div class="container">
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.IdTaiKhoan }, new { @class = "btn btn-primary edit-button" })
+
+    </p>
+    <p>
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary backlist float-left" })
+    </p>
+</div>

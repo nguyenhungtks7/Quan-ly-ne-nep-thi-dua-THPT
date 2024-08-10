@@ -1,0 +1,575 @@
+﻿@*@model IEnumerable<Quab_Ly_ne_nep_thi_dua.Models.HocSinh>*@
+@model IPagedList<Quab_Ly_ne_nep_thi_dua.Models.HocSinh>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Index";
+}
+@*<link href="~/Content/assets/css/giaodienidex.css" rel="stylesheet" />*@
+<style>
+    .search2 select {
+        width: calc(100% -5px);
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        width: 150px;
+        margin-right: 10px;
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .popup-content {
+        height: 225px;
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        width: 50%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+    }
+
+    .popup-header {
+        padding: 10px 15px;
+        border-bottom: 1px solid #ccc;
+        background-color: #f2f2f2;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .popup-body {
+        padding: 15px;
+    }
+
+    .popup-footer {
+        padding: 10px 15px;
+        border-top: 1px solid #ccc;
+        background-color: #f2f2f2;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .popup-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        float: right;
+    }
+
+        .popup-button:hover {
+            background-color: #0056b3;
+        }
+
+    .popup {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .popup-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 5px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .popup-content select,
+    .popup-content input[type="file"],
+    .popup-content input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .popup-content input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .popup-content input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+    .xoa-button {
+        border: none;
+        background-color: #dc0808;
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        margin-right: 30px;
+    }
+
+        .xoa-button:hover {
+            background-color: #0056b3;
+        }
+
+    .import-button {
+        border: none;
+        background-color: #268006;
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        /*   margin:0 auto;*/
+        margin-top: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+        .import-button:hover {
+            background-color: #0056b3;
+        }
+
+    #alert-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .alert {
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        background: linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61));
+        color: #fff;
+        border-color: #c3e6cb;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+
+    .alert-hide {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+    /* ----------------- Phân trang--------------*/
+    phantrang {
+        margin-left: 10px;
+    }
+
+    .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+
+        .pagination li {
+            display: inline;
+        }
+
+            .pagination li a,
+            .pagination li span {
+                position: relative;
+                float: left;
+                padding: 6px 12px;
+                margin-left: -1px;
+                line-height: 1.42857143;
+                color: #428bca;
+                text-decoration: none;
+                background-color: #fff;
+                border: 1px solid #ddd;
+            }
+
+            .pagination li:first-child a {
+                margin-left: 0;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+
+            .pagination li:last-child a {
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+
+            .pagination li.active span {
+                z-index: 2;
+                color: #fff;
+                cursor: default;
+                background-color: #428bca;
+                border-color: #428bca;
+            }
+
+            .pagination li.disabled span,
+            .pagination li.disabled a,
+            .pagination li.disabled a:hover,
+            .pagination li.disabled a:focus {
+                color: #777;
+                cursor: not-allowed;
+                background-color: #fff;
+                border-color: #ddd;
+            }
+
+            .pagination li a:hover,
+            .pagination li a:focus {
+                z-index: 2;
+                color: #2a6496;
+                background-color: #eee;
+                border-color: #ddd;
+            }
+
+            /* Định dạng cho phần số trang */
+            .pagination li a,
+            .pagination li span {
+                display: inline-block;
+                padding: 5px 10px;
+                margin-right: 5px;
+                border: 1px solid #ddd;
+                line-height: 1.42857143;
+                text-decoration: none;
+                color: #337ab7;
+                background-color: #fff;
+            }
+
+            .pagination li.active span,
+            .pagination li.active a,
+            .pagination li.active a:hover,
+            .pagination li.active a:focus {
+                z-index: 2;
+                color: #fff;
+                background-color: #337ab7;
+                border-color: #337ab7;
+                cursor: default;
+            }
+
+            .pagination li.disabled span,
+            .pagination li.disabled a,
+            .pagination li.disabled a:hover,
+            .pagination li.disabled a:focus {
+                color: #777;
+                cursor: not-allowed;
+                background-color: #fff;
+                border-color: #ddd;
+            }
+</style>
+@if (TempData["Xoathanhcong"] != null && (bool)TempData["Xoathanhcong"])
+{
+    <div id="alert-container"></div>
+    <script>
+        function showNotification(message) {
+            var alertElement = document.createElement('div');
+            alertElement.classList.add('alert', 'alert-success');
+            alertElement.textContent = message;
+            document.getElementById('alert-container').appendChild(alertElement);
+
+            setTimeout(function () {
+                alertElement.classList.add('alert-hide');
+                setTimeout(function () {
+                    alertElement.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        showNotification('Xóa thành công!');
+    </script>
+}
+@if (TempData["Suathanhcong"] != null && (bool)TempData["Suathanhcong"])
+{
+    <div id="alert-container"></div>
+    <script>
+        function showNotification(message) {
+            var alertElement = document.createElement('div');
+            alertElement.classList.add('alert', 'alert-success');
+            alertElement.textContent = message;
+            document.getElementById('alert-container').appendChild(alertElement);
+
+            setTimeout(function () {
+                alertElement.classList.add('alert-hide');
+                setTimeout(function () {
+                    alertElement.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        showNotification('Sửa thành công!');
+    </script>
+}
+@if (TempData["Themthanhcong"] != null && (bool)TempData["Themthanhcong"])
+{
+    <div id="alert-container"></div>
+    <script>
+        function showNotification(message) {
+            var alertElement = document.createElement('div');
+            alertElement.classList.add('alert', 'alert-success');
+            alertElement.textContent = message;
+            document.getElementById('alert-container').appendChild(alertElement);
+
+            setTimeout(function () {
+                alertElement.classList.add('alert-hide');
+                setTimeout(function () {
+                    alertElement.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        showNotification('Thêm thành công!');
+    </script>
+}
+@if (TempData["Importthanhcong"] != null && (bool)TempData["Importthanhcong"])
+{
+    <div id="alert-container"></div>
+    <script>
+        function showNotification(message) {
+            var alertElement = document.createElement('div');
+            alertElement.classList.add('alert', 'alert-success');
+            alertElement.textContent = message;
+            document.getElementById('alert-container').appendChild(alertElement);
+
+            setTimeout(function () {
+                alertElement.classList.add('alert-hide');
+                setTimeout(function () {
+                    alertElement.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        showNotification('Import thành công!');
+    </script>
+}
+<div class="container mt-4">
+    <h2>Quản lý học sinh</h2>
+
+    @using (Html.BeginForm("Index", "HocSinhs", FormMethod.Get, new { @class = "mt-4" }))
+    {
+
+        <div class="row" style="background-color: #f8f9fa; padding: 10px; border: 1px solid #dee2e6; border-radius: 10px; ">
+            <div class="col-md-3">
+                <p class="font-weight-bold">Lớp học:</p>
+                @Html.DropDownList("searchLop", ViewBag.LopList as SelectList, "Chọn lớp", new { @class = "form-control" })
+            </div>
+            <div class="col-md-3">
+                <p class="font-weight-bold">Họ tên học sinh:</p>
+                @Html.TextBox("searchHoTen", ViewBag.CurrentHoTenFilter as string, new { placeholder = "Họ tên học sinh", @class = "form-control" })
+            </div>
+            <div class="col-md-3">
+                <p class="font-weight-bold">Địa chỉ:</p>
+                @Html.TextBox("searchDiaChi", ViewBag.CurrentDiaChiFilter as string, new { placeholder = "Địa chỉ", @class = "form-control" })
+            </div>
+            <div class="col-md-3">
+                <p class="font-weight-bold">Email:</p>
+                @Html.TextBox("searchEmail", ViewBag.CurrentEmailFilter as string, new { placeholder = "Email", @class = "form-control" })
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary me-2 mr-2">
+                        <ion-icon name="search-outline"></ion-icon> Tìm kiếm
+                    </button>
+                    <button class="btn btn-secondary" id="clearFilters">
+                        <ion-icon name="refresh-outline"></ion-icon> Bỏ lọc
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    }
+
+    @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger mt-4" role="alert">
+            <p style="color:red; text-align:center">  @ViewBag.ErrorMessage</p>
+        </div>
+    }
+
+    <div class="d-flex justify-content-end mt-4">
+        <a href="@Url.Action("Create")" class="btn btn-success me-3">
+            <ion-icon name="person-add-outline"></ion-icon> Thêm học sinh
+        </a>
+        <a href="#" class="btn btn-danger ml-2" onclick="deleteSelected()">
+            <ion-icon name="trash-outline"></ion-icon> Xóa đã chọn
+        </a>
+        <button class="btn btn-info ms-3 ml-2" onclick="openPopup()">
+            <i class="fas fa-file-import"></i> Import
+        </button>
+    </div>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        <input type="checkbox" id="checkAll" />
+                    </th>
+                    <th>STT</th>
+                    <th>Họ tên học sinh</th>
+                    <th>Ngày sinh</th>
+                    <th>Giới tính</th>
+                    <th>Địa chỉ</th>
+                    <th>Email</th>
+                    <th>Lớp</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var stt = 1;
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="checkBoxClass" name="selectedIds" value="@item.IdHocSinh" />
+                        </td>
+                        <td>@stt</td>
+                        <td>@Html.DisplayFor(modelItem => item.HoTenHocSinh)</td>
+                        @{
+                            DateTime ngay;
+                            if (item.NgaySinh is DateTime)
+                            {
+                                ngay = (DateTime)item.NgaySinh;
+                            }
+                            else
+                            {
+                                ngay = DateTime.MinValue;
+                            }
+                        }
+                        <td>@ngay.ToString("dd/MM/yyyy")</td>
+                        <td>@Html.DisplayFor(modelItem => item.GioiTinh)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DiaChi)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Lop.TenLop)</td>
+                        <td>
+                            <a href="@Url.Action("Edit", new { id = item.IdHocSinh })" class="btn btn-primary btn-sm"><ion-icon name="create-outline"></ion-icon> Sửa</a>
+                            <a href="@Url.Action("Details", new { id = item.IdHocSinh })" class="btn btn-info btn-sm"><ion-icon name="eye-outline"></ion-icon> Xem</a>
+                            <a href="@Url.Action("Delete", new { id = item.IdHocSinh })" class="btn btn-danger btn-sm"><ion-icon name="trash-outline"></ion-icon> Xóa</a>
+                        </td>
+                    </tr>
+                    stt++;
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchTitle = Request.QueryString["searchTitle"] }))
+            </div>
+        </div>
+    </div>
+</div>
+<div id="importPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <form action="@Url.Action("ImportFromExcel", "HocSinhs")" method="post" enctype="multipart/form-data">
+            @Html.DropDownList("idlop", ViewBag.Loplist2 as SelectList, "Chọn lớp", new { @class = "form-control", required = "required" })
+            <input type="file" name="file" required />
+            <button type="submit" style="margin: 10px auto" class="popup-button"><i class="fas fa-file-import"></i> Import</button>
+        </form>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("clearFilters").addEventListener("click", function () {
+            // Lấy ra tất cả các input và select trong form
+            var formInputs = document.querySelectorAll('input[type="text"], input[type="date"], select');
+
+            // Duyệt qua từng phần tử để reset giá trị
+            formInputs.forEach(function (input) {
+                input.value = ""; // Reset giá trị về rỗng
+            });
+
+            // Gửi form để xóa bộ lọc
+            document.querySelector('form').submit();
+        });
+    });
+    function openPopup() {
+        document.getElementById("importPopup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("importPopup").style.display = "none";
+    }
+
+
+    document.getElementById('checkAll').onclick = function () {
+        var checkboxes = document.getElementsByClassName('checkBoxClass');
+        for (var checkbox of checkboxes) {
+            checkbox.checked = this.checked;
+        }
+    };
+
+    function deleteSelected() {
+        var selectedIds = [];
+        var checkboxes = document.querySelectorAll('input[name="selectedIds"]:checked');
+        checkboxes.forEach(function (checkbox) {
+            selectedIds.push(checkbox.value);
+        });
+
+        if (selectedIds.length > 0) {
+            if (confirm("Bạn có chắc chắn muốn xóa các học sinh đã chọn?")) {
+                window.location.href = '/HocSinhs/DeleteSelected?ids=' + selectedIds.join(',');
+            }
+        } else {
+            alert("Vui lòng chọn ít nhất một học sinh để xóa.");
+        }
+    }
+
+
+</script>

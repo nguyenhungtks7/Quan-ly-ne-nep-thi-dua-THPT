@@ -1,0 +1,46 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.Lop
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<link href="~/Content/assets/css/giaodiendelete.css" rel="stylesheet" />
+<h3>Bạn có chắc chắn muốn xóa lớp này không?</h3>
+<div class="formkk">
+  
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenLop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NamHoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamHoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GVCN.HoTenGVCN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GVCN.HoTenGVCN)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Xóa" class="btn btn-default" /> 
+    @Html.ActionLink(" Quay lại", "Index", null, new { @class = "backlist" })
+</div>
+    }
+</div>

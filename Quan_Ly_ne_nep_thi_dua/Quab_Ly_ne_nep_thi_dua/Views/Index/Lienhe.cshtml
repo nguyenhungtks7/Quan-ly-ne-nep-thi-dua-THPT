@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Lienhe";
+    Layout = "~/Views/Shared/_LayoutTrangchu.cshtml";
+}
+@*<link href="~/Content/assets/css/lienhe.css" rel="stylesheet" />*@
+<style>
+
+    .breadcrumb {
+        font-size: 14px;
+        margin-bottom: 10px;
+        background: #f0f0f0;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-##########" crossorigin="anonymous" />
+<div class="breadcrumb">
+    <a href="@Url.Action("Index", "Index")">Trang chủ</a>
+    <span>&gt;</span>
+    <span>Liên hệ</span>
+</div>
+<div class="row justify-content-center mb-lg-5">
+    <div class="col">
+        <h3 class="text-center">Thông tin liên hệ</h3>
+    </div>
+</div>
+
+    <div class="row" style="margin-bottom:200px">
+        <div class="col-md-6">
+
+            <div class="contact-info">
+
+                <p>Cơ quan chủ quản: SỞ GIÁO DỤC VÀ ĐÀO TẠO THÀNH PHỐ HÀ NỘI</p>
+                <p>Địa chỉ: Thôn Chu Trần, xã Tiến Thịnh, huyện Mê Linh, Hà Nội</p>
+                <p>Điện thoại: 04.38135009 (giờ hành chính)</p>
+                <p>Email: c3tienthinh@hanoiedu.vn</p>
+                <p>Chịu trách nhiệm chính: Thầy giáo Nguyễn Văn Đồng - Hiệu trưởng</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div id="google_map">
+                <div class="map_container">
+                    <div id="map" class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59523.93033521005!2d105.60220627678837!3d21.182398509196673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134f90998a710c3%3A0x54b3b60787b9dea1!2zVGjDtG4gQ2h1IFRy4bqnbi1UaeG6v24gVGjhu4tuaA!5e0!3m2!1svi!2s!4v1711794274157!5m2!1svi!2s" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

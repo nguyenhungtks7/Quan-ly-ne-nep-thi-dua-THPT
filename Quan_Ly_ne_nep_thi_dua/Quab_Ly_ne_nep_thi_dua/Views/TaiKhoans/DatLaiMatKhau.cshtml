@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "DatLaiMatKhau";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Quab_Ly_ne_nep_thi_dua.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Đặt lại mật khẩu";
+}
+
+<h2>Đặt lại mật khẩu</h2>
+
+<link href="~/Content/assets/css/giaodiendelete.css" rel="stylesheet" />
+<h2>Thông tin tài khoản   @Html.DisplayFor(model => model.TenDangNhap)</h2>
+
+<div class="formkk">
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDangNhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDangNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MatKhau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuyenTruyCap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuyenTruyCap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+
+        <dd>
+            @if (Model.TrangThai == true)
+            {
+                <p> Hoạt động</p>
+            }
+            else
+            {
+                <p> Không hoạt động</p>
+            }
+        </dd>
+
+    </dl>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.MatKhau, new { @class = "form-control" })
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Đặt lại mật khẩu" class="btn btn-default" />
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index", null, new { @class = "backlist" })
+</div>

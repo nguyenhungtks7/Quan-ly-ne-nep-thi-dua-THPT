@@ -1,0 +1,48 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.DanhGia
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<link href="~/Content/assets/css/giaodiendelete.css" rel="stylesheet" />
+<h3>Bạn chắc chắn muốn xóa đánh giá này không?</h3>
+<div class="formkk">
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TongDiem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TongDiem)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.XepLoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.XepLoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lop.TenLop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lop.TenLop)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" class="btn btn-default" /> |
+    @Html.ActionLink(" Quay lại", "Index", null, new { @class = "backlist" })
+</div>
+    }
+</div>

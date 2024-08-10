@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Quab_Ly_ne_nep_thi_dua.Models.ThongKeThangViewModel>
+@{
+    ViewBag.Title = "ThongkeThang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/assets/css/thongke.css" rel="stylesheet" />
+<style>
+    .breadcrumb {
+        font-size: 14px;
+        margin-bottom: 10px;
+        background: #f0f0f0;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+            color: #555;
+        }
+</style>
+<div class="breadcrumb">
+    <a href="@Url.Action("Index", "DanhGias")">Đánh giá</a>
+    <span>&gt;</span>
+    <span>Thống kê báo cáo theo tháng</span>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    <div class="form-tk">
+        <h2>Thống kê báo cáo theo tháng</h2>
+        <div class="form-group">
+            @Html.DropDownList("NamHoc", Enumerable.Range(DateTime.Now.Year - 5, 20).Select(x => new SelectListItem { Text = $"{x} - {x + 1}", Value = $"{x} - {x + 1}" }), "Chọn năm", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("KiHoc", new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Học kỳ 1", Value = "Học kỳ 1" },
+                new SelectListItem { Text = "Học kỳ 2", Value = "Học kỳ 2" }
+            }, "Chọn kì", new { @class = "form-control" })
+        </div>
+        @Html.DropDownList("Thang", Enumerable.Range(1, 12).Select(i => new SelectListItem { Text = "Tháng " + i, Value = i.ToString() }), "Chọn tháng", htmlAttributes: new { @class = "form-control", id = "Thang" })
+        <button type="submit" class="btn btn-primary mt-2"><ion-icon name="bar-chart"></ion-icon> Xem thống kê</button>
+    </div>
+}
+
+@if (Model != null)
+{
+    <h3>TỔNG HỢP THI ĐUA CÁC CHI ĐOÀN HỌC SINH NĂM HỌC @ViewBag.NamHoc - @ViewBag.KiHoc - Tháng @ViewBag.Thang</h3>
+    <div class="table-tk">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Lớp</th>
+                    <th>Tổng điểm</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var stt = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Rank</td>
+                        <td>@item.TenLop</td>
+                        <td>@item.TongDiem</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-success" id="exportExcel" onclick="location.href='@Url.Action("ExportToExcelThang", "DanhGias", new { namHoc = ViewBag.NamHoc, kiHoc = ViewBag.KiHoc, Thang = ViewBag.Thang  })'"><ion-icon name="newspaper-outline"></ion-icon>Xuất Excel</button>
+    </div>
+}

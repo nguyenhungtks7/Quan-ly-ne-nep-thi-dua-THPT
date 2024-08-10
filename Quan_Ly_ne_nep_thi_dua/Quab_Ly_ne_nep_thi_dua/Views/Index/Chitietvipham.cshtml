@@ -1,0 +1,91 @@
+﻿@model Quab_Ly_ne_nep_thi_dua.Models.ViPham
+@{
+    ViewBag.Title = "Chitietvipham";
+    Layout = "~/Views/Shared/_LayoutTrangchu.cshtml";
+}
+
+<h2 class="text-center mt-4 mb-5">Chi tiết vi phạm</h2>
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th scope="row">Lớp</th>
+            <td>@Html.DisplayFor(model => model.HocSinh.Lop.TenLop)</td>
+        </tr>
+        <tr>
+            <th scope="row">Họ tên học sinh</th>
+            <td>@Html.DisplayFor(model => model.HocSinh.HoTenHocSinh)</td>
+        </tr>
+        <tr>
+            <th scope="row">Ngày sinh</th>
+            <td>
+                @{
+                    DateTime ngay2;
+                    if (Model.HocSinh.NgaySinh is DateTime)
+                    {
+                        ngay2 = (DateTime)Model.HocSinh.NgaySinh;
+                    }
+                    else
+                    {
+                        ngay2 = DateTime.MinValue;
+                    }
+                }
+                @ngay2.ToString("dd/MM/yyyy")
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Giới tính</th>
+            <td>@Html.DisplayFor(model => model.HocSinh.GioiTinh)</td>
+        </tr>
+        <tr>
+            <th scope="row">Loại vi phạm</th>
+            <td>@Html.DisplayFor(model => model.LoaiViPham)</td>
+        </tr>
+        <tr>
+            <th scope="row">Mô tả vi phạm</th>
+            <td>@Html.DisplayFor(model => model.MoTaViPham)</td>
+        </tr>
+        <tr>
+            <th scope="row">Ngày vi phạm</th>
+            <td>
+                @{
+                    DateTime ngay;
+                    if (Model.NgayViPham is DateTime)
+                    {
+                        ngay = (DateTime)Model.NgayViPham;
+                    }
+                    else
+                    {
+                        ngay = DateTime.MinValue;
+                    }
+                }
+                @ngay.ToString("dd/MM/yyyy")
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Điểm trừ</th>
+            <td>@Html.DisplayFor(model => model.DiemTru)</td>
+        </tr>
+        <tr>
+            <th scope="row">Tuần vi phạm</th>
+            <td>@Html.DisplayFor(model => model.TenTuan)</td>
+        </tr>
+        <tr>
+            <th scope="row">Tháng</th>
+            <td>@Html.DisplayFor(model => model.Thang)</td>
+        </tr>
+        <tr>
+            <th scope="row">Học kỳ</th>
+            <td>@Html.DisplayFor(model => model.HocKy)</td>
+        </tr>
+        <tr>
+            <th scope="row">Năm học</th>
+            <td>@Html.DisplayFor(model => model.NamHoc)</td>
+        </tr>
+    </table>
+</div>
+
+<div class="text-center mt-4">
+    <a href="@Url.Action("Timkiemvipham", "Index")" class="btn btn-secondary" style="text-decoration: none;"><i class="fas fa-arrow-left"></i> Quay lại</a>
+
+</div>
